@@ -1,24 +1,19 @@
 import { Card, CardLoading } from '@/components/styles'
 import { Link } from 'react-router-dom'
 import { IAnime } from './types'
-import { useAnimeListCtx } from '@/context/AnimeListCtx'
 import { useController } from '@/components/templates/AnimeListTemplate/useController'
 
 export default function AnimeList() {
-  const {
-    state: { media },
-  } = useAnimeListCtx()
-
-  const { loading } = useController()
+  const { loading, media } = useController()
 
   if (loading)
-    return Array(10).fill(
-      <CardLoading>
+    return Array(10).map((_, i) => (
+      <CardLoading key={i}>
         <div>
           <div></div>
         </div>
       </CardLoading>
-    )
+    ))
 
   return media.map((anime: IAnime) => (
     <Card key={anime.id}>

@@ -1,4 +1,4 @@
-import { CardLoading } from '@/components/styles'
+import * as React from 'react'
 import { useController } from '@/components/templates/AnimeDetailTemplate/useController'
 import { useAnimeDetailCtx } from '@/context/AnimeDetailCtx'
 import { useParams } from 'react-router-dom'
@@ -10,7 +10,9 @@ export default function AnimeDetail() {
     setId,
   } = useAnimeDetailCtx()
 
-  setId(parseInt(id ?? '0'))
+  React.useEffect(() => {
+    setId(parseInt(id ?? '0'))
+  }, [id, setId])
 
   const { loading } = useController()
 

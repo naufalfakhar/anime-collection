@@ -4,7 +4,7 @@ import { useGetAnimeList } from '@/GraphQL/getAnimeList'
 
 export const useController = () => {
   const {
-    state: { pageInfo },
+    state: { pageInfo, media },
     setPagination,
     setMedia,
   } = useAnimeListCtx()
@@ -34,6 +34,7 @@ export const useController = () => {
   }
 
   return {
+    media,
     pageInfo,
     handlePageChange,
     handlePageChangeNext,
