@@ -1,14 +1,17 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import AnimeList from './pages/Anime'
-import CollectionList from './pages/Collection'
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import Routes from '@/routes'
 
-const router = createBrowserRouter([
-  { path: '/', element: <AnimeList /> },
-  { path: '/collection', element: <CollectionList /> },
-])
+const client = new ApolloClient({
+  uri: 'https://graphql.anilist.co',
+  cache: new InMemoryCache(),
+})
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <ApolloProvider client={client}>
+      <Routes />
+    </ApolloProvider>
+  )
 }
 
 export default App
