@@ -1,7 +1,10 @@
-import { useParams } from 'react-router-dom'
+import AnimeDetailTemplate from '@/components/templates/AnimeDetailTemplate'
+import { AnimeDetailCtxProvider } from '@/context/AnimeDetailCtx'
 
-export default function AnimeDetail() {
-  const { id } = useParams<{ id: string }>()
-
-  return <div>anime id : {id}</div>
+export default function Detail() {
+  return (
+    <AnimeDetailCtxProvider>
+      <AnimeDetailTemplate />
+    </AnimeDetailCtxProvider>
+  )
 }
