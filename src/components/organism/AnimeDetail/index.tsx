@@ -14,7 +14,11 @@ export default function AnimeDetail() {
     setId(parseInt(id ?? '0'))
   }, [id, setId])
 
-  const { loading } = useController()
+  const {
+    loading,
+    handleOpenModalAddCollection,
+    handleOpenModalCollectionInfo,
+  } = useController()
 
   if (loading) return <div>loading...</div>
 
@@ -30,8 +34,10 @@ export default function AnimeDetail() {
 
   return (
     <div>
-      <img src={bannerImage} alt={title.romaji} />
+      {/* <img src={bannerImage} alt={title.romaji} /> */}
       <img src={coverImage.large} alt={title.romaji} />
+      <button onClick={handleOpenModalAddCollection}>add to collection</button>
+      <button onClick={handleOpenModalCollectionInfo}>collection info</button>
       <h2>{title.romaji}</h2>
       <p>{description}</p>
       <span>{episodes}</span>

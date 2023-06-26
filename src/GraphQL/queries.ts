@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GET_ANIME = gql`
-  query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+  query GET_ANIME($id: Int, $page: Int, $perPage: Int, $search: String) {
     Page(page: $page, perPage: $perPage) {
       pageInfo {
         total
@@ -29,7 +29,7 @@ export const GET_ANIME = gql`
 `
 
 export const GET_ANIME_DETAIL = gql`
-  query ($id: Int) {
+  query GET_ANIME_DETAIL($id: Int) {
     Media(id: $id) {
       id
       bannerImage

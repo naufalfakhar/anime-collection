@@ -9,13 +9,14 @@ export default function AnimeListTemplate() {
     state: { pageInfo },
   } = useAnimeListCtx()
 
-  const { handlePageChange, handlePageChangeNext } = useController()
+  const { media, loading, handlePageChange, handlePageChangeNext } =
+    useController()
 
   return (
     <AnimeListLayout>
       <h1>Anime List</h1>
       <AnimeListGroup>
-        <AnimeList />
+        <AnimeList media={media} loading={loading} />
       </AnimeListGroup>
       <Pagination
         {...pageInfo}

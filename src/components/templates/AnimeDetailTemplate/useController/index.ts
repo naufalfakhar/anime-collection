@@ -4,8 +4,11 @@ import { useGetAnimeDetail } from '@/GraphQL/getAnimeDetail'
 
 export const useController = () => {
   const {
-    state: { id },
+    state: { id, Media },
     setMedia,
+    setId,
+    setShowModalAddCollection,
+    setShowModalCollectionInfo,
   } = useAnimeDetailCtx()
 
   const { loading, error, data, refetch } = useGetAnimeDetail(id)
@@ -18,7 +21,19 @@ export const useController = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
+  const handleOpenModalAddCollection = () => {
+    setShowModalAddCollection(true)
+  }
+
+  const handleOpenModalCollectionInfo = () => {
+    setShowModalCollectionInfo(true)
+  }
+
   return {
+    Media,
+    setId,
+    handleOpenModalAddCollection,
+    handleOpenModalCollectionInfo,
     data,
     loading,
     error,

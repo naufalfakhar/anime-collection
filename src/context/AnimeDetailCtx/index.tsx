@@ -27,6 +27,16 @@ const initialState: TState = {
     meanScore: 0,
   },
   skip: true,
+  collections: [],
+  newCollection: {
+    name: '',
+    animes: [],
+  },
+  isUnique: true,
+  collectionsUpdated: false,
+  showModalAddCollection: false,
+  showModalNewCollection: false,
+  showModalCollectionInfo: false,
 }
 
 const AnimeDetailCtx = React.createContext<TDefaultValue>({
@@ -35,6 +45,13 @@ const AnimeDetailCtx = React.createContext<TDefaultValue>({
   setId: () => undefined,
   setMedia: () => undefined,
   setSkip: () => undefined,
+  setCollections: () => undefined,
+  setNewCollection: () => undefined,
+  setIsUnique: () => undefined,
+  setCollectionsUpdated: () => undefined,
+  setShowModalAddCollection: () => undefined,
+  setShowModalNewCollection: () => undefined,
+  setShowModalCollectionInfo: () => undefined,
 })
 
 export const useAnimeDetailCtx = () => React.useContext(AnimeDetailCtx)

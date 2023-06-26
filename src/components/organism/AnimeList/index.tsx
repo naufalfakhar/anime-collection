@@ -1,13 +1,15 @@
 import { Card, CardLoading } from '@/components/styles'
 import { Link } from 'react-router-dom'
 import { IAnime } from './types'
-import { useController } from '@/components/templates/AnimeListTemplate/useController'
 
-export default function AnimeList() {
-  const { loading, media } = useController()
+type Props = {
+  loading: boolean
+  media: IAnime[]
+}
 
+export default function AnimeList({ loading, media }: Props) {
   if (loading)
-    return Array(10).map((_, i) => (
+    return Array.from(Array(10).keys()).map((_, i) => (
       <CardLoading key={i}>
         <div>
           <div></div>

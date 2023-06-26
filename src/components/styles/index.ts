@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 export const Layout = styled.div`
+  min-height: 100vh;
   width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
@@ -103,4 +104,27 @@ export const CardLoading = styled.li`
       }
     }
   }
+`
+
+export const ModalLayout = styled.div`
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 50%);
+  > div {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-y: auto;
+    background-color: #dedede;
+    @media (prefers-color-scheme: dark) {
+          background-color: #212121 ;
+  }
+`
+
+export const LabelGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `
