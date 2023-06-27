@@ -9,6 +9,8 @@ export const useController = () => {
     setId,
     setShowModalAddCollection,
     setShowModalCollectionInfo,
+    setSelectedCollection,
+    setRemovedCollection,
   } = useAnimeDetailCtx()
 
   const { loading, error, data, refetch } = useGetAnimeDetail(id)
@@ -23,6 +25,8 @@ export const useController = () => {
 
   const handleOpenModalAddCollection = () => {
     setShowModalAddCollection(true)
+    setSelectedCollection([])
+    setRemovedCollection([])
   }
 
   const handleOpenModalCollectionInfo = () => {

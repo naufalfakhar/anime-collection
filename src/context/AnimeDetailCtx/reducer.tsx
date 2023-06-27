@@ -38,6 +38,11 @@ export const reducer = (state: TState, action: TAction): TState => {
         draft.selectedCollection = action.selectedCollection
       })
 
+    case 'SET_REMOVED_COLLECTION':
+      return produce(state, (draft) => {
+        draft.removedCollection = action.removedCollection
+      })
+
     case 'SET_IS_UNIQUE':
       return produce(state, (draft) => {
         draft.isUnique = action.isUnique

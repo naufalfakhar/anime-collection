@@ -9,10 +9,12 @@ export const useController = () => {
       showModalAddCollection: isOpen,
       prevSelectedCollection,
       selectedCollection,
+      removedCollection,
       collectionsUpdated,
     },
     setPrevSelectedCollection,
     setSelectedCollection,
+    setRemovedCollection,
     setCollectionsUpdated,
     setShowModalAddCollection,
     setShowModalNewCollection,
@@ -28,14 +30,25 @@ export const useController = () => {
     const name = e.target.name
     const checked = e.target.checked
 
-    if (checked) {
-      setSelectedCollection([...prevSelectedCollection, name])
-    } else {
-      setSelectedCollection(
-        prevSelectedCollection.filter((item) => item !== name)
-      )
+    if (prevSelectedCollection.length > 0) {
+      if (checked) {
+        setSelectedCollection([...prevSelectedCollection, name])
+        setRemovedCollection(removedCollection.filter((item) => item !== name))
+      }
+      if (!checked) {
+        setRemovedCollection([...removedCollection, name])
+      }
+    }
+    if (prevSelectedCollection.length === 0) {
+      if (checked) {
+        setSelectedCollection([...selectedCollection, name])
+      }
+      if (!checked) {
+        setRemovedCollection(selectedCollection.filter((item) => item !== name))
+      }
     }
   }
+
   const handleAddToCollection = () => {
     setCollectionsUpdated(true)
     handleClose()
@@ -47,14 +60,11 @@ export const useController = () => {
   }
 
   React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  React.useEffect(() => {
     if (collectionsUpdated) {
       postToSelectedCollection(
         prevSelectedCollection,
         selectedCollection,
+        removedCollection,
         Media,
         currentCollectionList
       )
@@ -67,6 +77,8 @@ export const useController = () => {
     selectedCollection,
     Media,
     currentCollectionList,
+    prevSelectedCollection,
+    removedCollection,
     isOpen,
     setPrevSelectedCollection,
     setSelectedCollection,

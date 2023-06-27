@@ -17,6 +17,7 @@ export const postCollection = (collection: object) => {
 export const postToSelectedCollection = (
   prevSelectedCollection: string[],
   selectedCollection: string[],
+  removedCollection: string[],
   animeObject: TMedia,
   currentCollection: TCollections[]
 ) => {
@@ -28,20 +29,37 @@ export const postToSelectedCollection = (
           (item) => !selectedCollection.includes(item)
         )
       )
-    console.log(prevSelectedCollection, 'prev selected collection')
-    console.log(selectedCollection, 'selcted collection')
-    console.log(newCollection, 'new collection')
+    console.log('new collection', newCollection)
+    console.log('prev collection', prevSelectedCollection)
+    console.log('selected collection', selectedCollection)
+    console.log('removed collection', removedCollection)
+
     const result = currentCollection.map((item: TCollections) => {
-      console.log(newCollection.includes(item.name), 'new collection includes')
-      if (selectedCollection.includes(item.name)) {
-        if (newCollection.includes(item.name)) {
-          item.animes.push(animeObject)
-        }
-      } else {
+      if (selectedCollection.length === 0) {
         item.animes = item.animes.filter(
           (itm: TMedia) => itm.id !== animeObject.id
         )
+        console.log('all collection removed')
       }
+      if (prevSelectedCollection.length > 0) {
+        if (newCollection.includes(item.name)) {
+          item.animes.push(animeObject)
+          console.log('new collection added')
+        }
+        if (removedCollection.includes(item.name)) {
+          item.animes = item.animes.filter(
+            (anime) => anime.id !== animeObject.id
+          )
+          console.log('collection removed')
+        }
+      }
+      if (prevSelectedCollection.length === 0) {
+        if (selectedCollection.includes(item.name)) {
+          item.animes.push(animeObject)
+          console.log('new collection added')
+        }
+      }
+
       return item
     })
     localStorage.setItem('collection', JSON.stringify(result))

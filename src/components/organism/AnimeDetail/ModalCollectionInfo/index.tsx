@@ -1,6 +1,6 @@
 import { ModalLayout } from '@/components/styles'
-import ContentModalAddCollection from './content'
 import { useController } from './useController'
+import ContentModalCollectionInfo from './content'
 
 export default function ModalCollectionInfo() {
   const { isOpen, handleClose } = useController()
@@ -11,7 +11,7 @@ export default function ModalCollectionInfo() {
     <ModalLayout>
       <div>
         <div>ModalCollectionInfo</div>
-        <ContentModalAddCollection />
+        <ContentModalCollectionInfo />
         <button onClick={handleClose}>close</button>
       </div>
     </ModalLayout>

@@ -6,10 +6,17 @@ import { useController } from '../useController'
 export default function ContentModalAddCollection() {
   const {
     currentCollectionList,
+    prevSelectedCollection,
+    selectedCollection,
+    removedCollection,
     Media,
     handleCheckCollection,
     setPrevSelectedCollection,
   } = useController()
+
+  console.log(selectedCollection, ' selected controller')
+  console.log(prevSelectedCollection, ' prev controller')
+  console.log(removedCollection, ' removed controller')
 
   React.useEffect(() => {
     if (currentCollectionList === null) return

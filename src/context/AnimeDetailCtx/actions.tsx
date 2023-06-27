@@ -38,6 +38,10 @@ export const actions = (
     dispatch({ type: 'SET_SELECTED_COLLECTION', selectedCollection })
   },
 
+  setRemovedCollection: (removedCollection: TState['removedCollection']) => {
+    dispatch({ type: 'SET_REMOVED_COLLECTION', removedCollection })
+  },
+
   setIsUnique: (isUnique: TState['isUnique']) => {
     dispatch({ type: 'SET_IS_UNIQUE', isUnique })
   },
