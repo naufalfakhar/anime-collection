@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import RootLayout from '@/components/RootLayout'
+import RootLayout from '@/components/organism/RootLayout'
 import Anime from '@/pages/Anime'
 import CollectionList from '@/pages/Collection'
 import AnimeDetail from '@/pages/Anime/[id]'

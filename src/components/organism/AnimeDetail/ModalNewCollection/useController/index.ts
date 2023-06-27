@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useAnimeDetailCtx } from '@/context/AnimeDetailCtx'
 import { postCollection, getCollection } from '@/utils'
 import { TCollections } from '@/context/AnimeDetailCtx/types'
+import { current } from 'immer'
 
 export const useController = () => {
   const {
@@ -20,8 +21,17 @@ export const useController = () => {
     setShowModalNewCollection,
   } = useAnimeDetailCtx()
 
+  const currentCollection = getCollection()
+
   const handleClose = () => {
     setShowModalNewCollection(false)
+  }
+
+  const checkIfValueIsUnique = (value: string) => {
+    const existingValues = currentCollection.map(
+      (item: TCollections) => item.name
+    )
+    return !existingValues.includes(value)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,17 +44,10 @@ export const useController = () => {
         animes: [Media],
       })
     }
-    const isValueUnique = checkIfValueIsUnique(value)
-    setIsUnique(isValueUnique)
-  }
-
-  const currentCollection = getCollection()
-
-  const checkIfValueIsUnique = (value: string) => {
-    const existingValues = currentCollection.map(
-      (item: TCollections) => item.name
-    )
-    return !existingValues.includes(value)
+    if (currentCollection) {
+      const isValueUnique = checkIfValueIsUnique(value)
+      setIsUnique(isValueUnique)
+    }
   }
 
   const handleCreate = () => {
@@ -65,7 +68,6 @@ export const useController = () => {
     if (collections.length > 0 && collectionsUpdated) {
       postCollection(collections)
       setCollectionsUpdated(false)
-      console.log(collections)
       setNewCollection({
         name: '',
         animes: [],

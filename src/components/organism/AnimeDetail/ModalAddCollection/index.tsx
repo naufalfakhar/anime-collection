@@ -3,7 +3,13 @@ import ContentModalAddCollection from './content'
 import { useController } from './useController'
 
 export default function ModalAddCollection() {
-  const { isOpen, handleClose, handleOpenModalNewCollection } = useController()
+  const {
+    selectedCollection,
+    isOpen,
+    handleClose,
+    handleAddToCollection,
+    handleOpenModalNewCollection,
+  } = useController()
 
   if (!isOpen) return null
 
@@ -14,7 +20,7 @@ export default function ModalAddCollection() {
         <ContentModalAddCollection />
         <div>
           <button onClick={handleClose}>close</button>
-          <button onClick={handleClose}>done</button>
+          <button onClick={handleAddToCollection}>done</button>
           <button onClick={handleOpenModalNewCollection}>new collection</button>
         </div>
       </div>

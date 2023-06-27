@@ -1,20 +1,50 @@
+import * as React from 'react'
 import { LabelGroup } from '@/components/styles'
-import { TCollections } from '@/context/AnimeDetailCtx/types'
-import { getCollection } from '@/utils'
+import { TCollections, TMedia } from '@/context/AnimeDetailCtx/types'
+import { useController } from '../useController'
 
 export default function ContentModalAddCollection() {
-  const currentCollectionList = getCollection()
+  const {
+    currentCollectionList,
+    Media,
+    handleCheckCollection,
+    setPrevSelectedCollection,
+  } = useController()
+
+  React.useEffect(() => {
+    if (currentCollectionList === null) return
+    setPrevSelectedCollection(
+      currentCollectionList
+        .filter((collections: TCollections) => {
+          return collections.animes.some(
+            (anime: TMedia) => anime.id === Media.id
+          )
+        })
+        .map((collection: TCollections) => collection.name)
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   if (currentCollectionList === null) return <div>null</div>
 
   return (
     <LabelGroup>
-      {currentCollectionList.map((collections: TCollections, i: number) => (
-        <label key={i}>
-          <input type='checkbox' />
-          <span>{collections.name}</span>
-        </label>
-      ))}
+      {currentCollectionList.map((collections: TCollections, i: number) => {
+        const isChecked = collections.animes.some(
+          (anime) => anime.id === Media.id
+        )
+        return (
+          <label key={i}>
+            <input
+              type='checkbox'
+              name={collections.name}
+              defaultChecked={isChecked}
+              onChange={handleCheckCollection}
+            />
+            <span>{collections.name}</span>
+          </label>
+        )
+      })}
     </LabelGroup>
   )
 }

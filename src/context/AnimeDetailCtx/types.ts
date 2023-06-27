@@ -36,6 +36,8 @@ export type TState = {
     name: string
     animes: TMedia[]
   }
+  prevSelectedCollection: string[]
+  selectedCollection: string[]
   isUnique: boolean
   collectionsUpdated: boolean
   showModalAddCollection: boolean
@@ -54,6 +56,14 @@ export type TAction =
   | {
       type: 'SET_NEW_COLLECTION'
       newCollection: TState['newCollection']
+    }
+  | {
+      type: 'SET_PREV_SELECTED_COLLECTION'
+      prevSelectedCollection: TState['prevSelectedCollection']
+    }
+  | {
+      type: 'SET_SELECTED_COLLECTION'
+      selectedCollection: TState['selectedCollection']
     }
   | {
       type: 'SET_IS_UNIQUE'
@@ -84,6 +94,8 @@ export type TDefaultValue = {
   setSkip: (payload: TState['skip']) => void
   setCollections: (payload: TState['collections']) => void
   setNewCollection: (payload: TState['newCollection']) => void
+  setPrevSelectedCollection: (payload: TState['selectedCollection']) => void
+  setSelectedCollection: (payload: TState['selectedCollection']) => void
   setIsUnique: (payload: TState['isUnique']) => void
   setCollectionsUpdated: (payload: TState['collectionsUpdated']) => void
   setShowModalAddCollection: (payload: TState['showModalAddCollection']) => void

@@ -28,6 +28,16 @@ export const actions = (
     dispatch({ type: 'SET_NEW_COLLECTION', newCollection })
   },
 
+  setPrevSelectedCollection: (
+    prevSelectedCollection: TState['prevSelectedCollection']
+  ) => {
+    dispatch({ type: 'SET_PREV_SELECTED_COLLECTION', prevSelectedCollection })
+  },
+
+  setSelectedCollection: (selectedCollection: TState['selectedCollection']) => {
+    dispatch({ type: 'SET_SELECTED_COLLECTION', selectedCollection })
+  },
+
   setIsUnique: (isUnique: TState['isUnique']) => {
     dispatch({ type: 'SET_IS_UNIQUE', isUnique })
   },
