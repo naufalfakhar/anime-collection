@@ -8,7 +8,7 @@ export default function CollectionList() {
     <div>
       {currentCollectionList.map((collections: any, i: any) => (
         <div key={i}>
-          <Link to={`/collection/${collections.name}`}>
+          <Link to={`/collection/${i}`}>
             {/* <img
               src={
                 collections.animes.map((anime) => anime.bannerImage)[0] ??
