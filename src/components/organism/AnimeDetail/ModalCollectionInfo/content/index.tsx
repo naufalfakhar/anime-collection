@@ -18,11 +18,7 @@ export default function ContentModalCollectionInfo() {
         return (
           isCollected && (
             <li key={i}>
-              <Link
-                to={`/collections/${collections.animes.map(
-                  (anime) => anime.id
-                )}`}
-              >
+              <Link to={`/collection/${collections.name}`}>
                 {collections.name}
               </Link>
             </li>

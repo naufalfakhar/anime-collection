@@ -62,3 +62,13 @@ export const postToSelectedCollection = (
     console.log(result, 'result')
   }
 }
+
+export const removeCollection = (removedCollection: string) => {
+  const currentCollection = getLocalStorage('collection')
+  if (currentCollection) {
+    const result = currentCollection.filter(
+      (item: TCollections) => item.name !== removedCollection
+    )
+    postCollection(result)
+  }
+}
