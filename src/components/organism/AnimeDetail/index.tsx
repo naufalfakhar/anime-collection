@@ -1,24 +1,22 @@
 import * as React from 'react'
-import { useController } from '@/components/templates/AnimeDetailTemplate/useController'
-import { useAnimeDetailCtx } from '@/context/AnimeDetailCtx'
 import { useParams } from 'react-router-dom'
+import { useController } from './useController'
 
 export default function AnimeDetail() {
   const { id } = useParams<{ id: string }>()
+
   const {
-    state: { Media },
+    collectionsUpdated,
+    Media,
+    loading,
     setId,
-  } = useAnimeDetailCtx()
+    handleOpenModalAddCollection,
+    handleOpenModalCollectionInfo,
+  } = useController()
 
   React.useEffect(() => {
     setId(parseInt(id ?? '0'))
   }, [id, setId])
-
-  const {
-    loading,
-    handleOpenModalAddCollection,
-    handleOpenModalCollectionInfo,
-  } = useController()
 
   if (loading) return <div>loading...</div>
 
@@ -34,7 +32,7 @@ export default function AnimeDetail() {
 
   return (
     <div>
-      {/* <img src={bannerImage} alt={title.romaji} /> */}
+      <img src={bannerImage} alt={title.romaji} />
       <img src={coverImage.large} alt={title.romaji} />
       <button onClick={handleOpenModalAddCollection}>add to collection</button>
       <button onClick={handleOpenModalCollectionInfo}>collection info</button>

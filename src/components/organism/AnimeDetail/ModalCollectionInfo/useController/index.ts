@@ -1,5 +1,5 @@
 import { useAnimeDetailCtx } from '@/context/AnimeDetailCtx'
-import { getCollection } from '@/utils'
+import { getLocalStorage } from '@/utils'
 
 export const useController = () => {
   const {
@@ -8,7 +8,7 @@ export const useController = () => {
     setPrevSelectedCollection,
   } = useAnimeDetailCtx()
 
-  const currentCollectionList = getCollection()
+  const currentCollectionList = getLocalStorage('collection')
 
   const handleClose = () => {
     setShowModalCollectionInfo(false)

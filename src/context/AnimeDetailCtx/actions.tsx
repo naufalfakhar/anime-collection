@@ -46,6 +46,10 @@ export const actions = (
     dispatch({ type: 'SET_IS_UNIQUE', isUnique })
   },
 
+  setCollectionsAdded: (collectionsAdded: TState['collectionsAdded']) => {
+    dispatch({ type: 'SET_COLLECTIONS_ADDED', collectionsAdded })
+  },
+
   setCollectionsUpdated: (collectionsUpdated: TState['collectionsUpdated']) => {
     dispatch({ type: 'SET_COLLECTIONS_UPDATED', collectionsUpdated })
   },

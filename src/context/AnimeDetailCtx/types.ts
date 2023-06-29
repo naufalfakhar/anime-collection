@@ -40,6 +40,7 @@ export type TState = {
   selectedCollection: string[]
   removedCollection: string[]
   isUnique: boolean
+  collectionsAdded: boolean
   collectionsUpdated: boolean
   showModalAddCollection: boolean
   showModalNewCollection: boolean
@@ -75,6 +76,10 @@ export type TAction =
       isUnique: TState['isUnique']
     }
   | {
+      type: 'SET_COLLECTIONS_ADDED'
+      collectionsAdded: TState['collectionsAdded']
+    }
+  | {
       type: 'SET_COLLECTIONS_UPDATED'
       collectionsUpdated: TState['collectionsUpdated']
     }
@@ -103,6 +108,7 @@ export type TDefaultValue = {
   setSelectedCollection: (payload: TState['selectedCollection']) => void
   setRemovedCollection: (payload: TState['removedCollection']) => void
   setIsUnique: (payload: TState['isUnique']) => void
+  setCollectionsAdded: (payload: TState['collectionsAdded']) => void
   setCollectionsUpdated: (payload: TState['collectionsUpdated']) => void
   setShowModalAddCollection: (payload: TState['showModalAddCollection']) => void
   setShowModalNewCollection: (payload: TState['showModalNewCollection']) => void

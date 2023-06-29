@@ -31,12 +31,7 @@ export const AnimeListCtxProvider = ({
   children: React.ReactNode
 }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
-  const memoized = React.useMemo(
-    () => actions(state, dispatch),
-    [state, dispatch]
-  )
+  const val = actions(state, dispatch)
 
-  return (
-    <AnimeListCtx.Provider value={memoized}>{children}</AnimeListCtx.Provider>
-  )
+  return <AnimeListCtx.Provider value={val}>{children}</AnimeListCtx.Provider>
 }

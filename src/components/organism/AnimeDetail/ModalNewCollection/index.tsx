@@ -3,7 +3,7 @@ import { useController } from './useController'
 import ContentModalNewCollection from './content'
 
 export default function ModalNewCollection() {
-  const { collections, isOpen, handleClose, handleCreate } = useController()
+  const { isOpen, handleClose, handleCreate } = useController()
 
   if (!isOpen) return null
 

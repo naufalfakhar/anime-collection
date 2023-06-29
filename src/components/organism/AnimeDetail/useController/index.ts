@@ -4,7 +4,7 @@ import { useGetAnimeDetail } from '@/GraphQL/getAnimeDetail'
 
 export const useController = () => {
   const {
-    state: { id, Media },
+    state: { id, Media, collectionsUpdated },
     setMedia,
     setId,
     setShowModalAddCollection,
@@ -34,6 +34,7 @@ export const useController = () => {
   }
 
   return {
+    collectionsUpdated,
     Media,
     setId,
     handleOpenModalAddCollection,

@@ -1,32 +1,65 @@
-import { Card, CardLoading } from '@/components/styles'
+import {
+  AnimeListGroup,
+  Card,
+  CardImage,
+  CardLoading,
+  CardOverlay,
+  CardSpan,
+  CardSpanGroup,
+  CardTitle,
+} from '@/components/styles'
 import { Link } from 'react-router-dom'
 import { IAnime } from './types'
+import { useController } from './useController'
 
-type Props = {
-  loading: boolean
-  media: IAnime[]
-}
+export default function AnimeList() {
+  const { media, loading } = useController()
 
-export default function AnimeList({ loading, media }: Props) {
   if (loading)
-    return Array.from(Array(10).keys()).map((_, i) => (
-      <CardLoading key={i}>
-        <div>
-          <div></div>
-        </div>
-      </CardLoading>
-    ))
+    return (
+      <AnimeListGroup>
+        {Array.from(Array(10).keys()).map((_, i) => (
+          <CardLoading key={i}>
+            <div>
+              <div></div>
+            </div>
+          </CardLoading>
+        ))}
+      </AnimeListGroup>
+    )
 
-  return media.map((anime: IAnime) => (
-    <Card key={anime.id}>
-      <Link to={`/anime/${anime.id}`}>
-        <img src={anime.coverImage.large} alt={anime.title.romaji} />
-        <div>
-          <span>{anime.season}</span>
-          <span>{anime.seasonYear}</span>
-        </div>
-        <h2>{anime.title.romaji}</h2>
-      </Link>
-    </Card>
-  ))
+  return (
+    <AnimeListGroup>
+      {media.map((anime: IAnime) => (
+        <Card key={anime.id}>
+          <Link to={`/anime/${anime.id}`}>
+            <CardImage src={anime.coverImage.large} alt={anime.title.romaji} />
+            <CardOverlay>
+              <CardTitle>{anime.title.romaji}</CardTitle>
+              <CardSpanGroup>
+                <CardSpan>{anime.season}</CardSpan>
+                <CardSpan>{anime.seasonYear}</CardSpan>
+                <CardSpan>
+                  <svg
+                    width='24'
+                    height='24'
+                    fill='yellow'
+                    stroke='currentColor'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='1'
+                    style={{ width: '0.75rem', height: '0.75rem' }}
+                    viewBox='0 0 24 24'
+                  >
+                    <path d='M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z'></path>
+                  </svg>
+                  <div>5</div>
+                </CardSpan>
+              </CardSpanGroup>
+            </CardOverlay>
+          </Link>
+        </Card>
+      ))}
+    </AnimeListGroup>
+  )
 }

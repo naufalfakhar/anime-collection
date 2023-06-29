@@ -1,26 +1,21 @@
 import { TCollections, TMedia } from '@/context/AnimeDetailCtx/types'
 
-export const getCollection = () => {
-  const collection = localStorage.getItem('collection')
+export const getLocalStorage = (key: string) => {
+  const collection = localStorage.getItem(key)
   return collection ? JSON.parse(collection) : null
 }
 
 export const postCollection = (collection: object) => {
-  const currentCollection = getCollection()
-  if (currentCollection) {
-    localStorage.setItem('collection', JSON.stringify(collection))
-  } else {
-    localStorage.setItem('collection', JSON.stringify(collection))
-  }
+  localStorage.setItem('collection', JSON.stringify(collection))
 }
 
 export const postToSelectedCollection = (
   prevSelectedCollection: string[],
   selectedCollection: string[],
   removedCollection: string[],
-  animeObject: TMedia,
-  currentCollection: TCollections[]
+  animeObject: TMedia
 ) => {
+  const currentCollection = getLocalStorage('collection')
   if (currentCollection) {
     const newCollection = selectedCollection
       .filter((item) => !prevSelectedCollection.includes(item))
@@ -29,20 +24,20 @@ export const postToSelectedCollection = (
           (item) => !selectedCollection.includes(item)
         )
       )
+
+    const filteredCollection = newCollection
+      .filter((item) => !prevSelectedCollection.includes(item))
+      .filter((item) => !removedCollection.includes(item))
+
     console.log('new collection', newCollection)
+    console.log('fil collection', filteredCollection)
     console.log('prev collection', prevSelectedCollection)
     console.log('selected collection', selectedCollection)
     console.log('removed collection', removedCollection)
 
     const result = currentCollection.map((item: TCollections) => {
-      if (selectedCollection.length === 0) {
-        item.animes = item.animes.filter(
-          (itm: TMedia) => itm.id !== animeObject.id
-        )
-        console.log('all collection removed')
-      }
       if (prevSelectedCollection.length > 0) {
-        if (newCollection.includes(item.name)) {
+        if (filteredCollection.includes(item.name)) {
           item.animes.push(animeObject)
           console.log('new collection added')
         }
@@ -56,12 +51,14 @@ export const postToSelectedCollection = (
       if (prevSelectedCollection.length === 0) {
         if (selectedCollection.includes(item.name)) {
           item.animes.push(animeObject)
-          console.log('new collection added')
+          console.log('new collection added 2')
         }
       }
 
       return item
     })
-    localStorage.setItem('collection', JSON.stringify(result))
+    // localStorage.setItem('collection', JSON.stringify(result))
+    postCollection(result)
+    console.log(result, 'result')
   }
 }

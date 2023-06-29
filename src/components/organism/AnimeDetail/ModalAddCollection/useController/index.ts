@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useAnimeDetailCtx } from '@/context/AnimeDetailCtx'
-import { getCollection, postToSelectedCollection } from '@/utils'
+import { getLocalStorage, postToSelectedCollection } from '@/utils'
 
 export const useController = () => {
   const {
@@ -20,7 +20,7 @@ export const useController = () => {
     setShowModalNewCollection,
   } = useAnimeDetailCtx()
 
-  const currentCollectionList = getCollection()
+  const currentCollectionList = getLocalStorage('collection')
 
   const handleClose = () => {
     setShowModalAddCollection(false)
@@ -54,25 +54,23 @@ export const useController = () => {
     handleClose()
   }
 
-  const handleOpenModalNewCollection = () => {
-    setShowModalAddCollection(false)
-    setShowModalNewCollection(true)
-  }
-
   React.useEffect(() => {
     if (collectionsUpdated) {
       postToSelectedCollection(
         prevSelectedCollection,
         selectedCollection,
         removedCollection,
-        Media,
-        currentCollectionList
+        Media
       )
       setCollectionsUpdated(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionsUpdated])
 
+  const handleOpenModalNewCollection = () => {
+    setShowModalAddCollection(false)
+    setShowModalNewCollection(true)
+  }
   return {
     selectedCollection,
     Media,

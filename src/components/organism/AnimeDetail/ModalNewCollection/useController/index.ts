@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { useAnimeDetailCtx } from '@/context/AnimeDetailCtx'
-import { postCollection, getCollection } from '@/utils'
+import { postCollection, getLocalStorage } from '@/utils'
 import { TCollections } from '@/context/AnimeDetailCtx/types'
-import { current } from 'immer'
 
 export const useController = () => {
   const {
@@ -11,17 +10,17 @@ export const useController = () => {
       collections,
       newCollection,
       isUnique,
-      collectionsUpdated,
+      collectionsAdded,
       showModalNewCollection: isOpen,
     },
     setCollections,
     setNewCollection,
     setIsUnique,
-    setCollectionsUpdated,
+    setCollectionsAdded,
     setShowModalNewCollection,
   } = useAnimeDetailCtx()
 
-  const currentCollection = getCollection()
+  const currentCollection = getLocalStorage('collection')
 
   const handleClose = () => {
     setShowModalNewCollection(false)
@@ -35,12 +34,11 @@ export const useController = () => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name
     const value = e.target.value
     if (/^[a-zA-Z0-9]*$/.test(value)) {
       setNewCollection({
         ...newCollection,
-        [name]: value,
+        name: value,
         animes: [Media],
       })
     }
@@ -57,7 +55,7 @@ export const useController = () => {
       } else {
         setCollections([...collections, newCollection])
       }
-      setCollectionsUpdated(true)
+      setCollectionsAdded(true)
       handleClose()
     } else {
       console.log('Value is not unique. Cannot perform create action.')
@@ -65,16 +63,16 @@ export const useController = () => {
   }
 
   React.useEffect(() => {
-    if (collections.length > 0 && collectionsUpdated) {
+    if (collections.length > 0 && collectionsAdded) {
       postCollection(collections)
-      setCollectionsUpdated(false)
+      setCollectionsAdded(false)
       setNewCollection({
         name: '',
         animes: [],
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionsUpdated])
+  }, [collectionsAdded])
 
   return {
     isUnique,

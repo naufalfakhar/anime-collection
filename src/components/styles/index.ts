@@ -1,10 +1,24 @@
 import styled from '@emotion/styled'
 
+export const theme = {
+  colors: {
+    background: {
+      summer: '#FFD700',
+      winter: '#B3DAF1',
+      spring: '#FFF1A6',
+      fall: '#D45B12',
+    },
+  },
+}
+
 export const Layout = styled.div`
   min-height: 100vh;
   width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   @media (min-width: 640px) {
     max-width: 640px;
   }
@@ -22,11 +36,9 @@ export const Layout = styled.div`
   }
 `
 
-export const HeaderElement = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 0;
+export const PageTitle = styled.h1`
+  font-size: 1.5rem;
+  font-weight: 700;
 `
 
 export const AnimeListLayout = styled.div`
@@ -34,7 +46,6 @@ export const AnimeListLayout = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem 0;
   gap: 1rem;
 `
 
@@ -43,37 +54,68 @@ export const AnimeListGroup = styled.ul`
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1.5rem;
   width: 100%;
-  list-style: none;
-
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 250px);
   }
 `
 
 export const Card = styled.li`
+  height: 380px;
   > a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: relative;
+    display: inline-block;
+    width: 100%;
     height: 100%;
-    > img {
-      border-radius: 0.5rem;
-      width: 100%;
-      height: 100%;
-      aspect-ratio: auto;
-    }
-    > div {
-      margin-top: 0.5rem;
-      width: 100%;
-      display: flex;
-      items-align: center;
-      justify-content: space-between;
-    }
-    > h2 {
-      font-size: 0.75rem;
-      text-align: center;
-    }
   }
+`
+
+export const CardImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+`
+
+export const CardOverlay = styled.div`
+  border-radius: 1rem;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: start;
+  gap: 0.5rem;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 20%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0.1) 60%
+  );
+`
+
+export const CardTitle = styled.h2`
+  font-size: 0.8rem;
+  text-align: start;
+`
+
+export const CardSpanGroup = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`
+
+export const CardSpan = styled.span`
+  font-size: 0.6rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.5rem;
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  text-transform: lowercase;
 `
 
 export const CardLoading = styled.li`
@@ -82,7 +124,7 @@ export const CardLoading = styled.li`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 380px;
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     @keyframes pulse {
       0%,
