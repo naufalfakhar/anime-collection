@@ -201,12 +201,8 @@ export const PaginationButton = styled.button<ButtonProps>`
   width: 30px;
   padding: 0.25rem;
   border: none;
-  color: #f5f5f7;
-  background-color: '#1d1d1f';
-  @media (prefers-color-scheme: dark) {
-    background-color: ${(props) => (props.cn ? '#94a3b8' : '#f5f5f7')};
-    color: ${(props) => (props.cn ? '#f5f5f7' : '#1d1d1f')};
-  }
+  background-color: ${(props) => (props.cn ? '#94a3b8' : '#f5f5f7')};
+  color: ${(props) => (props.cn ? '#f5f5f7' : '#1d1d1f')};
   &:hover {
     cursor: ${(props) => (props.cn ? 'not-allowed' : 'pointer')};
   }
@@ -451,6 +447,18 @@ export const LabelGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+`
+export const BulkContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow: auto;
+  max-height: 300px;
+`
+export const BulkGroup = styled.div`
+  display: flex;
+  items-align: center;
+  gap: 0.5rem;
 `
 
 export const LabelCheckbox = styled.label`
