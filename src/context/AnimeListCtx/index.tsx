@@ -12,15 +12,36 @@ const initialState: TState = {
     perPage: 10,
   },
   media: [],
+  mediaModal: [],
+  selectedAnime: [],
+  selectedAnimeName: [],
+  newCollection: {
+    name: '',
+    animes: [],
+  },
+  collections: [],
+  collectionsAdded: false,
+  isUnique: true,
   skip: true,
+  skipModal: true,
+  showModalBulkAdd: false,
 }
 
 const AnimeListCtx = React.createContext<TDefaultValue>({
   state: initialState,
   dispatch: () => undefined,
   setPagination: () => undefined,
+  setSelectedAnime: () => undefined,
+  setSelectedAnimeName: () => undefined,
+  setNewCollection: () => undefined,
+  setCollections: () => undefined,
+  setCollectionsAdded: () => undefined,
+  setIsUnique: () => undefined,
   setMedia: () => undefined,
   setSkip: () => undefined,
+  setMediaModal: () => undefined,
+  setSkipModal: () => undefined,
+  setShowModalBulkAdd: () => undefined,
 })
 
 export const useAnimeListCtx = () => React.useContext(AnimeListCtx)

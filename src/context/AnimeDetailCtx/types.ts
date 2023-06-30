@@ -6,10 +6,7 @@ export type TState = {
   Media: IAnime
   skip: boolean
   collections: ICollection[]
-  newCollection: {
-    name: string
-    animes: IAnime[]
-  }
+  newCollection: ICollection
   prevSelectedCollection: string[]
   selectedCollection: string[]
   removedCollection: string[]

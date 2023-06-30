@@ -1,15 +1,22 @@
-import { Header, PageTitle } from '@/components/styles'
+import { CollectionListButton, Header, PageTitle } from '@/components/styles'
 import { Link } from 'react-router-dom'
-import { Archive } from 'lucide-react'
+import { Archive, Plus } from 'lucide-react'
+import { useController } from '../useController'
 
 export default function AnimeListHeader() {
+  const { handleOpenModalBulkAdd } = useController()
   return (
     <Header>
       <Link to={'/'}>AniCollect</Link>
       <PageTitle>Anime List</PageTitle>
-      <Link to={'/collection'}>
-        <Archive />
-      </Link>
+      <div>
+        <CollectionListButton onClick={handleOpenModalBulkAdd}>
+          <Plus />
+        </CollectionListButton>
+        <Link to={'/collection'}>
+          <Archive />
+        </Link>
+      </div>
     </Header>
   )
 }

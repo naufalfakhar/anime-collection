@@ -12,15 +12,23 @@ export const GET_ANIME = gql`
       }
       media(id: $id, search: $search) {
         id
-        title {
-          romaji
-        }
+        bannerImage
         coverImage {
           extraLarge
           large
           medium
           color
         }
+        title {
+          romaji
+          english
+          native
+          userPreferred
+        }
+        description
+        episodes
+        genres
+        meanScore
         season
         seasonYear
       }

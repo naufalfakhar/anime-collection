@@ -482,6 +482,17 @@ export const Input = styled.input`
   }
 `
 
+export const InputBulk = styled.input`
+  width: 50%;
+  padding: 0.5rem;
+  border: 1px solid #dedede;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  &:focus {
+    outline: none;
+  }
+`
+
 interface divProps {
   con?: boolean | undefined
 }
