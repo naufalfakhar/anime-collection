@@ -20,7 +20,10 @@ export default function CollectionList() {
   if (currentCollectionList === null) {
     return (
       <ContentCollectionGroup>
-        <h2>There is no collection</h2>
+        <h2>
+          There is no collection 🥺, lets create some with plus button in the
+          top right of the page
+        </h2>
       </ContentCollectionGroup>
     )
   }
