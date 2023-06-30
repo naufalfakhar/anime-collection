@@ -1,5 +1,4 @@
 import {
-  BulkContent,
   Button,
   ButtonClose,
   ModalHeader,

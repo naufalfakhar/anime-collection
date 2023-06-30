@@ -5,7 +5,7 @@ import { useGetAnime } from '@/GraphQL/getAnime'
 
 export const useController = () => {
   const {
-    state: { pageInfo, media, mediaModal, skipModal },
+    state: { pageInfo, media, skipModal },
     setPagination,
     setMedia,
     setMediaModal,
