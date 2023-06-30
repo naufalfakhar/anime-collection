@@ -49,6 +49,8 @@ export const GET_ANIME_DETAIL = gql`
       episodes
       genres
       meanScore
+      season
+      seasonYear
     }
   }
 `

@@ -8,6 +8,27 @@ export const actions = (
   state,
   dispatch,
 
+  setName: (name: TState['name']) => {
+    dispatch({
+      type: 'SET_NAME',
+      name,
+    })
+  },
+
+  setIsLoading: (isLoading: TState['isLoading']) => {
+    dispatch({
+      type: 'SET_IS_LOADING',
+      isLoading,
+    })
+  },
+
+  setSelectedCollection: (selectedCollection: TState['selectedCollection']) => {
+    dispatch({
+      type: 'SET_SELECTED_COLLECTION',
+      selectedCollection,
+    })
+  },
+
   setCollections: (collections: TState['collections']) => {
     dispatch({
       type: 'SET_COLLECTIONS',
@@ -19,6 +40,13 @@ export const actions = (
     dispatch({
       type: 'SET_NEW_COLLECTION',
       newCollection,
+    })
+  },
+
+  setNewName: (newName: TState['newName']) => {
+    dispatch({
+      type: 'SET_NEW_NAME',
+      newName,
     })
   },
 
@@ -36,10 +64,17 @@ export const actions = (
     })
   },
 
-  setCollectionAdded: (collectionAdded: TState['collectionAdded']) => {
+  setThisAnime: (thisAnime: TState['thisAnime']) => {
     dispatch({
-      type: 'SET_COLLECTION_ADDED',
-      collectionAdded,
+      type: 'SET_THIS_ANIME',
+      thisAnime,
+    })
+  },
+
+  setCollectionEdited: (collectionEdited: TState['collectionEdited']) => {
+    dispatch({
+      type: 'SET_COLLECTION_EDITED',
+      collectionEdited,
     })
   },
 
@@ -50,21 +85,21 @@ export const actions = (
     })
   },
 
-  setShowModalRemoveCollection: (
-    showModalRemoveCollection: TState['showModalRemoveCollection']
+  setShowModalRemoveAnime: (
+    showModalRemoveAnime: TState['showModalRemoveAnime']
   ) => {
     dispatch({
-      type: 'SET_SHOW_MODAL_REMOVE_COLLECTION',
-      showModalRemoveCollection,
+      type: 'SET_SHOW_MODAL_REMOVE_ANIME',
+      showModalRemoveAnime,
     })
   },
 
-  setShowModalAddCollection: (
-    showModalAddCollection: TState['showModalAddCollection']
+  setShowModalEditCollection: (
+    showModalEditCollection: TState['showModalEditCollection']
   ) => {
     dispatch({
-      type: 'SET_SHOW_MODAL_ADD_COLLECTION',
-      showModalAddCollection,
+      type: 'SET_SHOW_MODAL_EDIT_COLLECTION',
+      showModalEditCollection,
     })
   },
 })

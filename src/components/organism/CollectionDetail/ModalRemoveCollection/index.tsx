@@ -4,12 +4,12 @@ import {
   ModalHeader,
   ModalLayout,
 } from '@/components/styles'
+import ContentModalRemoveCollection from './content'
 import { useController } from './useController'
-import ContentModalEditCollection from './content'
 import { X } from 'lucide-react'
 
-export default function ModalEditCollection() {
-  const { isOpen, handleClose, handleEdit } = useController()
+export default function ModalRemoveCollection() {
+  const { isOpen, handleClose, handleRemoveCollection } = useController()
 
   if (!isOpen) return null
 
@@ -17,13 +17,13 @@ export default function ModalEditCollection() {
     <ModalLayout>
       <div>
         <ModalHeader>
-          <p>Edit collection</p>
+          <p>are u sure want to remove?</p>
           <ButtonClose onClick={handleClose}>
             <X />
           </ButtonClose>
         </ModalHeader>
-        <ContentModalEditCollection />
-        <Button onClick={handleEdit}>edit collection</Button>
+        <ContentModalRemoveCollection />
+        <Button onClick={handleRemoveCollection}>Remove</Button>
       </div>
     </ModalLayout>
   )

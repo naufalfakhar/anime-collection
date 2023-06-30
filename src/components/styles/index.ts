@@ -323,6 +323,25 @@ export const AnimeDetailInfoGroup = styled.ul`
     }
   }
 `
+export const CollectionDetailInfoGroup = styled.ul`
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+  @media (min-width: 1024px) {
+    gap: 1.5rem;
+  }
+  > li {
+    width: 100%;
+    font-size: 14px;
+    @media (min-width: 1024px) {
+      font-size: 16px;
+    }
+  }
+`
 
 export const AnimeDetailGenreGroup = styled.ul`
   display: flex;
@@ -340,7 +359,7 @@ export const AnimeDetailGenreGroup = styled.ul`
 export const AnimeDetailButtonGroup = styled.div`
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -474,6 +493,13 @@ export const ContentCollectionGroup = styled.div`
   gap: 1rem;
 `
 
+export const ContentCollectionDetailGroup = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
+
 export const CollectionGroup = styled.div`
   position: relative;
   border-radius: 0.5rem;
@@ -484,6 +510,9 @@ export const CollectionGroup = styled.div`
     display: flex;
     align-items: start;
     width: 100%;
+    > img {
+      border-radius: 0.5rem 0 0 0.5rem;
+    }
     > div {
       width: 50%;
       overflow: hidden;
@@ -495,11 +524,18 @@ export const CollectionGroup = styled.div`
   }
 `
 
-export const CollectionDetailBanner = styled.img`
+export const CollectionListBanner = styled.img`
   width: 50%;
   height: 200px;
   object-fit: cover;
   border-radius: 0.5rem 0 0 0.5rem;
+`
+
+export const CollectionDetailBanner = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.5rem;
 `
 export const CollectionButtonGroup = styled.div`
   position: absolute;
@@ -521,4 +557,32 @@ export const CollectionButton = styled.button<ButtonProps>`
     cursor: pointer;
     opacity: 0.8;
   }
+`
+
+export const CollectionDetailButton = styled.button<ButtonProps>`
+  postion: absolute;
+  top: 1rem;
+  right: 1rem;
+  max-height: 40px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: ${(props) => props.cc};
+  background-color: ${(props) => props.cbc};
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+`
+
+export const CollectionDetailEditNameGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`
+
+export const CollectionDetailGroup = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `

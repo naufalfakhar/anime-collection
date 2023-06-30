@@ -44,10 +44,10 @@ export const CollectionListCtxProvider = ({
   children: React.ReactNode
 }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
-  const val = actions(state, dispatch)
+  const value = actions(state, dispatch)
 
   return (
-    <CollectionListCtx.Provider value={val}>
+    <CollectionListCtx.Provider value={value}>
       {children}
     </CollectionListCtx.Provider>
   )

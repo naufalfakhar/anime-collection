@@ -12,7 +12,6 @@ export default function ModalAddCollection() {
   const { isOpen, handleClose, handleCreate } = useController()
 
   if (!isOpen) return null
-  console.log('tes')
 
   return (
     <ModalLayout>

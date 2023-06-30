@@ -29,12 +29,6 @@ export const postToSelectedCollection = (
       .filter((item) => !prevSelectedCollection.includes(item))
       .filter((item) => !removedCollection.includes(item))
 
-    console.log('new collection', newCollection)
-    console.log('fil collection', filteredCollection)
-    console.log('prev collection', prevSelectedCollection)
-    console.log('selected collection', selectedCollection)
-    console.log('removed collection', removedCollection)
-
     const result = currentCollection.map((item: ICollection) => {
       if (prevSelectedCollection.length > 0) {
         if (filteredCollection.includes(item.name)) {
@@ -59,7 +53,6 @@ export const postToSelectedCollection = (
     })
     // localStorage.setItem('collection', JSON.stringify(result))
     postCollection(result)
-    console.log(result, 'result')
   }
 }
 
@@ -69,6 +62,20 @@ export const removeCollection = (removedCollection: string) => {
     const result = currentCollection.filter(
       (item: ICollection) => item.name !== removedCollection
     )
+    postCollection(result)
+  }
+}
+
+export const updateCollection = (updatedCollection: ICollection) => {
+  const currentCollection = getLocalStorage('collection')
+  if (currentCollection) {
+    const result = currentCollection.map((item: ICollection) => {
+      if (item.name === updatedCollection.name) {
+        item.animes = updatedCollection.animes
+      }
+      return item
+    })
+    console.log(result)
     postCollection(result)
   }
 }

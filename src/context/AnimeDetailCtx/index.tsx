@@ -70,14 +70,9 @@ export const AnimeDetailCtxProvider = ({
   children: React.ReactNode
 }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
-  const memoized = React.useMemo(
-    () => actions(state, dispatch),
-    [state, dispatch]
-  )
+  const value = actions(state, dispatch)
 
   return (
-    <AnimeDetailCtx.Provider value={memoized}>
-      {children}
-    </AnimeDetailCtx.Provider>
+    <AnimeDetailCtx.Provider value={value}>{children}</AnimeDetailCtx.Provider>
   )
 }

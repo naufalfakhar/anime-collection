@@ -4,30 +4,43 @@ import { reducer } from './reducer'
 import { actions } from './actions'
 
 const initialState: TState = {
+  name: null,
+  isLoading: true,
+  selectedCollection: {
+    name: '',
+    animes: [],
+  },
+  thisCollection: '',
+  thisAnime: '',
+  newName: '',
   collections: [],
   newCollection: {
     name: '',
     animes: [],
   },
-  thisCollection: '',
   isUnique: true,
-  collectionAdded: false,
+  collectionEdited: false,
   collectionRemoved: false,
-  showModalAddCollection: false,
-  showModalRemoveCollection: false,
+  showModalEditCollection: false,
+  showModalRemoveAnime: false,
 }
 
 const CollectionDetailCtx = React.createContext<TDefaultValue>({
   state: initialState,
   dispatch: () => undefined,
+  setName: () => undefined,
+  setIsLoading: () => undefined,
+  setSelectedCollection: () => undefined,
   setCollections: () => undefined,
   setNewCollection: () => undefined,
+  setNewName: () => undefined,
   setIsUnique: () => undefined,
   setThisCollection: () => undefined,
-  setCollectionAdded: () => undefined,
+  setThisAnime: () => undefined,
+  setCollectionEdited: () => undefined,
   setCollectionRemoved: () => undefined,
-  setShowModalAddCollection: () => undefined,
-  setShowModalRemoveCollection: () => undefined,
+  setShowModalEditCollection: () => undefined,
+  setShowModalRemoveAnime: () => undefined,
 })
 
 export const useCollectionDetailCtx = () =>
@@ -39,10 +52,10 @@ export const CollectionDetailCtxProvider = ({
   children: React.ReactNode
 }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
-  const val = actions(state, dispatch)
+  const value = actions(state, dispatch)
 
   return (
-    <CollectionDetailCtx.Provider value={val}>
+    <CollectionDetailCtx.Provider value={value}>
       {children}
     </CollectionDetailCtx.Provider>
   )

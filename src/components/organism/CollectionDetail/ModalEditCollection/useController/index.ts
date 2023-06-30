@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { getLocalStorage, postCollection } from '@/utils'
-import { useCollectionListCtx } from '@/context/CollectionListCtx'
 import { ICollection } from '@/types'
+import { useCollectionDetailCtx } from '@/context/CollectionDetailCtx'
+import { useNavigate } from 'react-router-dom'
 
 export const useController = () => {
   const {
@@ -13,15 +14,20 @@ export const useController = () => {
       newCollection,
       isUnique,
       thisCollection,
+      selectedCollection,
     },
     setNewName,
     setShowModalEditCollection,
     setCollectionEdited,
     setCollections,
+    setSelectedCollection,
     setIsUnique,
-  } = useCollectionListCtx()
+    setIsLoading,
+  } = useCollectionDetailCtx()
 
   const currentCollectionList = getLocalStorage('collection')
+
+  const navigate = useNavigate()
 
   const handleClose = () => {
     setShowModalEditCollection(false)
@@ -53,7 +59,10 @@ export const useController = () => {
         }
         return obj
       })
+      setSelectedCollection(updatedArr)
       setCollections(updatedArr)
+      navigate(`/collection/${newName}`)
+      setIsLoading(true)
       setCollectionEdited(true)
       handleClose()
     } else {

@@ -4,7 +4,7 @@ import {
   Button,
   CollectionButton,
   CollectionButtonGroup,
-  CollectionDetailBanner,
+  CollectionListBanner,
   CollectionGroup,
   ContentCollectionGroup,
 } from '@/components/styles'
@@ -22,7 +22,7 @@ export default function CollectionList() {
       {currentCollectionList.map((collections: ICollection, i: number) => (
         <CollectionGroup key={i}>
           <Link to={`/collection/${collections.name}`}>
-            <CollectionDetailBanner
+            <CollectionListBanner
               src={
                 collections.animes.map(
                   (anime: IAnime) => anime.bannerImage
