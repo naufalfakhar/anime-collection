@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { getLocalStorage, removeCollection, updateCollection } from '@/utils'
+import { getLocalStorage, updateCollection } from '@/utils'
 import { useCollectionDetailCtx } from '@/context/CollectionDetailCtx'
 
 export const useController = () => {

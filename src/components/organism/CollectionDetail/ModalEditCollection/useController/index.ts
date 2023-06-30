@@ -14,7 +14,6 @@ export const useController = () => {
       newCollection,
       isUnique,
       thisCollection,
-      selectedCollection,
     },
     setNewName,
     setShowModalEditCollection,

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useController } from './useController'
 import {
-  Button,
   CollectionButton,
   CollectionButtonGroup,
   CollectionListBanner,

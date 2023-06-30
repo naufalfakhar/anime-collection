@@ -1,8 +1,6 @@
-import * as React from 'react'
 import { Header, PageTitle } from '@/components/styles'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useController } from '../useController'
-import { getLocalStorage } from '@/utils'
 
 export default function CollectionDetailHeader() {
   const { isLoading } = useController()
