@@ -13,7 +13,7 @@ export default function ContentModalEditCollection() {
         value={newName}
         onChange={handleChange}
       />
-      <MaxLength con={newName.length < 16 ? false : true}>
+      <MaxLength con={newName.length <= 16 ? false : true}>
         <p>max length is 16.</p> {newName.length}/16
       </MaxLength>
     </form>

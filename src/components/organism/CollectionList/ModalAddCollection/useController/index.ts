@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { getLocalStorage, postCollection } from '@/utils'
 import { useCollectionListCtx } from '@/context/CollectionListCtx'
-import { TCollections } from '@/context/AnimeDetailCtx/types'
+import { ICollection } from '@/types'
 
 export const useController = () => {
   const {
@@ -32,7 +32,7 @@ export const useController = () => {
 
   const checkIfValueIsUnique = (value: string) => {
     const existingValues = currentCollectionList.map(
-      (item: TCollections) => item.name
+      (item: ICollection) => item.name
     )
     return !existingValues.includes(value)
   }

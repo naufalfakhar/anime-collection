@@ -1,6 +1,4 @@
-import * as React from 'react'
 import { useAnimeListCtx } from '@/context/AnimeListCtx'
-import { useGetAnimeList } from '@/GraphQL/getAnimeList'
 
 export const useController = () => {
   const {

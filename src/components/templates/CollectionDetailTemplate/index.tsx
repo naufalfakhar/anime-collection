@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { AnimeListLayout, PageTitle } from '@/components/styles'
+import { TemplateLayout, PageTitle } from '@/components/styles'
 import { getLocalStorage, postCollection } from '@/utils'
 import { useParams } from 'react-router-dom'
 
@@ -8,6 +8,9 @@ export default function CollectionDetailTemplate() {
   const currentCollectionList = getLocalStorage('collection')
   const obj = currentCollectionList[id ?? '']
 
+  console.log(
+    currentCollectionList.find((collection) => collection.name === id)
+  )
   React.useEffect(() => {
     console.log('obj', obj)
   }, [obj])
@@ -18,7 +21,7 @@ export default function CollectionDetailTemplate() {
   }
 
   return (
-    <AnimeListLayout>
+    <TemplateLayout>
       <PageTitle>{obj?.name} Detail</PageTitle>
       <div>{id}</div>
       {obj.animes.map((anime) => (
@@ -28,6 +31,6 @@ export default function CollectionDetailTemplate() {
           <button>edit</button>
         </div>
       ))}
-    </AnimeListLayout>
+    </TemplateLayout>
   )
 }

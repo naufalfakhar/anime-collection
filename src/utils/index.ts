@@ -1,4 +1,4 @@
-import { TCollections, TMedia } from '@/context/AnimeDetailCtx/types'
+import { IAnime, ICollection } from '@/types'
 
 export const getLocalStorage = (key: string) => {
   const collection = localStorage.getItem(key)
@@ -13,7 +13,7 @@ export const postToSelectedCollection = (
   prevSelectedCollection: string[],
   selectedCollection: string[],
   removedCollection: string[],
-  animeObject: TMedia
+  animeObject: IAnime
 ) => {
   const currentCollection = getLocalStorage('collection')
   if (currentCollection) {
@@ -35,7 +35,7 @@ export const postToSelectedCollection = (
     console.log('selected collection', selectedCollection)
     console.log('removed collection', removedCollection)
 
-    const result = currentCollection.map((item: TCollections) => {
+    const result = currentCollection.map((item: ICollection) => {
       if (prevSelectedCollection.length > 0) {
         if (filteredCollection.includes(item.name)) {
           item.animes.push(animeObject)
@@ -67,7 +67,7 @@ export const removeCollection = (removedCollection: string) => {
   const currentCollection = getLocalStorage('collection')
   if (currentCollection) {
     const result = currentCollection.filter(
-      (item: TCollections) => item.name !== removedCollection
+      (item: ICollection) => item.name !== removedCollection
     )
     postCollection(result)
   }

@@ -1,14 +1,17 @@
-import { Button, Header, PageTitle } from '@/components/styles'
+import { CollectionListButton, Header, PageTitle } from '@/components/styles'
 import { Link } from 'react-router-dom'
 import { useController } from '../useController'
+import { Plus } from 'lucide-react'
 
 export default function CollectionListHeader() {
   const { handleOpenModalAddCollection } = useController()
   return (
     <Header>
-      <Link to={'/'}>back</Link>
+      <Link to={'/'}>AniCollect</Link>
       <PageTitle>Collection List</PageTitle>
-      <Button onClick={handleOpenModalAddCollection}>add</Button>
+      <CollectionListButton onClick={handleOpenModalAddCollection}>
+        <Plus />
+      </CollectionListButton>
     </Header>
   )
 }

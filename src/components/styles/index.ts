@@ -1,16 +1,6 @@
 import styled from '@emotion/styled'
 
-export const theme = {
-  colors: {
-    background: {
-      summer: '#FFD700',
-      winter: '#B3DAF1',
-      spring: '#FFF1A6',
-      fall: '#D45B12',
-    },
-  },
-}
-
+// Region Layout Start
 export const Layout = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -35,6 +25,39 @@ export const Layout = styled.div`
   }
 `
 
+export const TemplateLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+`
+
+export const ModalLayout = styled.div`
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 50%);
+  z-index: 100;
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 250px;
+    max-width: 80vw;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #dedede;
+    @media (prefers-color-scheme: dark) {
+      background-color: #212121;
+    }
+  }
+`
+// Region Layout End
+
 export const Header = styled.header`
   width: 100%;
   display: flex;
@@ -43,19 +66,11 @@ export const Header = styled.header`
 `
 
 export const PageTitle = styled.h1`
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 700;
   @media (min-width: 1024px) {
-    font-size: 2rem;
+    font-size: 32px;
   }
-`
-
-export const AnimeListLayout = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
 `
 
 export const AnimeListGroup = styled.ul`
@@ -108,10 +123,10 @@ export const CardOverlay = styled.div`
 `
 
 export const CardTitle = styled.h2`
-  font-size: 0.8rem;
+  font-size: 14px;
   text-align: start;
   @media (min-width: 1024px) {
-    font-size: 1.25rem;
+    font-size: 20px;
   }
 `
 
@@ -124,20 +139,16 @@ export const CardSpan = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
   text-transform: lowercase;
-  font-size: 0.625rem;
+  font-size: 10px;
   padding: 4px 6px;
-  @media (min-width: 1024px) {
-    font-size: 0.875rem;
-    padding: 4px 6px;
-  }
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   color: #f5f5f7;
-  background-color: #1d1d1f;
-  @media (prefers-color-scheme: dark) {
-    background-color: #f5f5f7;
-    color: #1d1d1f;
+  background-color: #52525b;
+  min-width: 50px;
+  @media (min-width: 1024px) {
+    font-size: 14px;
+    padding: 4px 6px;
   }
 `
 
@@ -176,14 +187,14 @@ export const CardLoading = styled.li`
 export const PaginationGroup = styled.div`
   display: inline-grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
   margin-top: 1rem;
   font-size: 0.8rem;
 `
 
 interface ButtonProps {
-  active?: boolean
-  cn?: string
+  cbc?: string
+  cc?: string
+  cn?: boolean
 }
 
 export const PaginationButton = styled.button<ButtonProps>`
@@ -193,20 +204,16 @@ export const PaginationButton = styled.button<ButtonProps>`
   color: #f5f5f7;
   background-color: '#1d1d1f';
   @media (prefers-color-scheme: dark) {
-    background-color: ${(props) => (props.active ? '#94a3b8' : '#f5f5f7')};
-    color: ${(props) => (props.active ? '#f5f5f7' : '#1d1d1f')};
+    background-color: ${(props) => (props.cn ? '#94a3b8' : '#f5f5f7')};
+    color: ${(props) => (props.cn ? '#f5f5f7' : '#1d1d1f')};
   }
   &:hover {
-    cursor: pointer;
+    cursor: ${(props) => (props.cn ? 'not-allowed' : 'pointer')};
   }
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
-`
-
-export const AnimeDetailGroup = styled.div`
-  width: 100%;
 `
 
 export const AnimeDetailBanner = styled.img`
@@ -227,6 +234,20 @@ export const AnimeDetailContent = styled.div`
   }
 `
 
+export const AnimeDetailContentGroup = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 170px;
+  @media (min-width: 1024px) {
+    padding-left: 310px;
+    align-items: start;
+  }
+`
+
 export const AnimeDetailCoverImage = styled.img`
   position: absolute;
   left: 10px;
@@ -243,24 +264,11 @@ export const AnimeDetailCoverImage = styled.img`
   }
 `
 
-export const AnimeDetailContentGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  padding-left: 170px;
-  @media (min-width: 1024px) {
-    padding-left: 310px;
-    align-items: start;
-  }
-`
-
 export const AnimeDetailTitle = styled.h2`
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 700;
   @media (min-width: 1024px) {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 `
 
@@ -268,13 +276,12 @@ export const AnimeDetailTitleGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 600;
+  font-weight: 500;
   > h2 {
-    font-size: 12px;
+    font-size: 10px;
     @media (min-width: 1024px) {
-      font-size: 20px;
+      font-size: 14px;
     }
-  }
 `
 
 export const AnimeDetailDescriptionGroup = styled.div`
@@ -284,14 +291,14 @@ export const AnimeDetailDescriptionGroup = styled.div`
   gap: 0.5rem;
   margin: 2rem 0;
   > h2 {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     @media (min-width: 1024px) {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
   > p {
-    font-size: 10px;
+    font-size: 12px;
     text-align: justify;
     @media (min-width: 1024px) {
       font-size: 16px;
@@ -300,6 +307,8 @@ export const AnimeDetailDescriptionGroup = styled.div`
 `
 
 export const AnimeDetailInfoGroup = styled.ul`
+  width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -308,7 +317,7 @@ export const AnimeDetailInfoGroup = styled.ul`
     gap: 0.5rem;
   }
   > li {
-    font-size: 12px;
+    font-size: 14px;
     @media (min-width: 1024px) {
       font-size: 16px;
     }
@@ -323,12 +332,49 @@ export const AnimeDetailGenreGroup = styled.ul`
   > li {
     padding: 4px 6px;
     border-radius: 0.5rem;
+    border: 1px solid #f5f5f7;
     color: #f5f5f7;
-    background-color: #1d1d1f;
-    @media (prefers-color-scheme: dark) {
-      background-color: #f5f5f7;
-      color: #1d1d1f;
-    }
+  }
+`
+
+export const AnimeDetailButtonGroup = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+`
+
+export const AnimeDetailButton = styled.button`
+  width: 100%;
+  max-height: 40px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+`
+
+export const CollectionListButton = styled.button`
+  max-height: 40px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: #f5f5f7;
+  background-color: #1d1d1f;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
   }
 `
 
@@ -339,19 +385,16 @@ export const ButtonGroup = styled.div`
   gap: 0.5rem;
 `
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.5rem;
-  color: #f5f5f7;
-  background-color: #1d1d1f;
   z-index: 10;
-  @media (prefers-color-scheme: dark) {
-    background-color: #f5f5f7;
-    color: #1d1d1f;
-  }
+  background-color: #f5f5f7;
+  color: #1d1d1f;
   &:hover {
     cursor: pointer;
+    opacity: 0.8;
   }
 `
 
@@ -361,30 +404,6 @@ export const ButtonClose = styled.button`
   color: #f5f5f7;
   &:hover {
     cursor: pointer;
-  }
-`
-
-export const ModalLayout = styled.div`
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 50%);
-  z-index: 100;
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    min-width: 250px;
-    max-width: 80vw;
-    padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
-    background-color: #dedede;
-    @media (prefers-color-scheme: dark) {
-      background-color: #212121;
-    }
   }
 `
 
@@ -490,9 +509,16 @@ export const CollectionButtonGroup = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  > button {
-    &:hover {
-      background-color: red;
-    }
+`
+export const CollectionButton = styled.button<ButtonProps>`
+  max-height: 40px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: ${(props) => props.cc};
+  background-color: ${(props) => props.cbc};
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
   }
 `

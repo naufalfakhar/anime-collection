@@ -3,18 +3,18 @@ import { useParams } from 'react-router-dom'
 import { useController } from './useController'
 import {
   AnimeDetailBanner,
+  AnimeDetailButton,
+  AnimeDetailButtonGroup,
   AnimeDetailContent,
   AnimeDetailContentGroup,
   AnimeDetailCoverImage,
   AnimeDetailDescriptionGroup,
   AnimeDetailGenreGroup,
-  AnimeDetailGroup,
   AnimeDetailInfoGroup,
   AnimeDetailTitle,
   AnimeDetailTitleGroup,
-  Button,
-  ButtonGroup,
 } from '@/components/styles'
+import { Plus, Info } from 'lucide-react'
 
 export default function AnimeDetail() {
   const { id } = useParams<{ id: string }>()
@@ -44,7 +44,7 @@ export default function AnimeDetail() {
   } = Media
 
   return (
-    <AnimeDetailGroup>
+    <div>
       <AnimeDetailBanner
         src={bannerImage ?? '/no-image.png'}
         alt={title.romaji}
@@ -53,12 +53,15 @@ export default function AnimeDetail() {
         <AnimeDetailCoverImage src={coverImage.large} alt={title.romaji} />
         <AnimeDetailContentGroup>
           <AnimeDetailTitle>{title.romaji}</AnimeDetailTitle>
-          <AnimeDetailTitleGroup>
-            <h2>{title.english}</h2>
-            <div>.</div>
-            <h2>{title.native}</h2>
-          </AnimeDetailTitleGroup>
           <AnimeDetailInfoGroup>
+            <li>
+              alternative title :
+              <AnimeDetailTitleGroup>
+                <h2>{title.english}</h2>
+                <div>|</div>
+                <h2>{title.native}</h2>
+              </AnimeDetailTitleGroup>
+            </li>
             <li>episodes : {episodes}</li>
             <li>score : {meanScore}</li>
             <li>genres : </li>
@@ -67,19 +70,22 @@ export default function AnimeDetail() {
                 <li key={index}>{genre}</li>
               ))}
             </AnimeDetailGenreGroup>
+            <AnimeDetailButtonGroup>
+              <AnimeDetailButton onClick={handleOpenModalCollectionInfo}>
+                <Info />
+              </AnimeDetailButton>
+              <AnimeDetailButton onClick={handleOpenModalAddCollection}>
+                <Plus />
+              </AnimeDetailButton>
+            </AnimeDetailButtonGroup>
           </AnimeDetailInfoGroup>
         </AnimeDetailContentGroup>
+
         <AnimeDetailDescriptionGroup>
           <h2>{title.romaji} description</h2>
           <p>{description}</p>
         </AnimeDetailDescriptionGroup>
       </AnimeDetailContent>
-      <ButtonGroup>
-        <Button onClick={handleOpenModalAddCollection}>
-          add to collection
-        </Button>
-        <Button onClick={handleOpenModalCollectionInfo}>collection info</Button>
-      </ButtonGroup>
-    </AnimeDetailGroup>
+    </div>
   )
 }

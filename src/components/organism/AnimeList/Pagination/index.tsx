@@ -30,7 +30,7 @@ export default function Pagination() {
       {pageNumbers.map((pageNumber) => (
         <PaginationButton
           key={pageNumber}
-          active={pageInfo.currentPage === pageNumber}
+          cn={pageInfo.currentPage === pageNumber}
           onClick={() => handlePageChange(pageNumber)}
         >
           {pageNumber}

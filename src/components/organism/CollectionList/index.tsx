@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom'
 import { useController } from './useController'
 import {
   Button,
+  CollectionButton,
   CollectionButtonGroup,
   CollectionDetailBanner,
   CollectionGroup,
   ContentCollectionGroup,
 } from '@/components/styles'
-import { TCollections, TMedia } from '@/context/AnimeDetailCtx/types'
+import { IAnime, ICollection } from '@/types'
+import { Edit2, Trash2 } from 'lucide-react'
 
 export default function CollectionList() {
   const {
@@ -17,13 +19,13 @@ export default function CollectionList() {
   } = useController()
   return (
     <ContentCollectionGroup>
-      {currentCollectionList.map((collections: TCollections, i: number) => (
+      {currentCollectionList.map((collections: ICollection, i: number) => (
         <CollectionGroup key={i}>
-          <Link to={`/collection/${i}`}>
+          <Link to={`/collection/${collections.name}`}>
             <CollectionDetailBanner
               src={
                 collections.animes.map(
-                  (anime: TMedia) => anime.bannerImage
+                  (anime: IAnime) => anime.bannerImage
                 )[0] ?? '/no-image.png'
               }
               alt={collections.name}
@@ -34,16 +36,18 @@ export default function CollectionList() {
             </div>
           </Link>
           <CollectionButtonGroup>
-            <Button
+            <CollectionButton
+              cc='#f5f5f7'
+              cbc='#dc2626'
               onClick={() => handleOpenModalRemoveCollection(collections.name)}
             >
-              remove
-            </Button>
-            <Button
+              <Trash2 />
+            </CollectionButton>
+            <CollectionButton
               onClick={() => handleOpenModalEditCollection(collections.name)}
             >
-              edit
-            </Button>
+              <Edit2 />
+            </CollectionButton>
           </CollectionButtonGroup>
         </CollectionGroup>
       ))}

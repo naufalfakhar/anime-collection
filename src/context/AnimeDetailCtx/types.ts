@@ -1,40 +1,14 @@
+import { IAnime, ICollection } from '@/types'
 import { Dispatch } from 'react'
-
-export type TMedia = {
-  id: number
-  title: {
-    romaji: string
-    english: string
-    native: string
-  }
-  coverImage: {
-    extraLarge: string
-    large: string
-    medium: string
-    color: string
-  }
-  bannerImage: string
-  season: string
-  seasonYear: number
-  description: string
-  episodes: number
-  genres: string[]
-  meanScore: number
-}
-
-export type TCollections = {
-  name: string
-  animes: TMedia[]
-}
 
 export type TState = {
   id: number
-  Media: TMedia
+  Media: IAnime
   skip: boolean
-  collections: TCollections[]
+  collections: ICollection[]
   newCollection: {
     name: string
-    animes: TMedia[]
+    animes: IAnime[]
   }
   prevSelectedCollection: string[]
   selectedCollection: string[]

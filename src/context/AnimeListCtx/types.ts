@@ -1,27 +1,9 @@
+import { IAnime, IPageInfo } from '@/types'
 import { Dispatch } from 'react'
 
 export type TState = {
-  pageInfo: {
-    total: number
-    currentPage: number
-    lastPage: number
-    hasNextPage: boolean
-    perPage: number
-  }
-  media: {
-    id: number
-    title: {
-      romaji: string
-    }
-    coverImage: {
-      extraLarge: string
-      large: string
-      medium: string
-      color: string
-    }
-    season: string
-    seasonYear: number
-  }[]
+  pageInfo: IPageInfo
+  media: IAnime[]
   skip: boolean
 }
 

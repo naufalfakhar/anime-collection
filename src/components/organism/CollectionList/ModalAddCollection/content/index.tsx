@@ -13,7 +13,7 @@ export default function ContentModalAddCollection() {
         value={newCollection.name}
         onChange={handleChange}
       />
-      <MaxLength con={newCollection.name.length < 16 ? false : true}>
+      <MaxLength con={newCollection.name.length <= 16 ? false : true}>
         <p>max length is 16.</p> {newCollection.name.length}/16
       </MaxLength>
     </form>

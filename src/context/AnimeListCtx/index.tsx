@@ -31,7 +31,7 @@ export const AnimeListCtxProvider = ({
   children: React.ReactNode
 }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState)
-  const val = actions(state, dispatch)
+  const value = actions(state, dispatch)
 
-  return <AnimeListCtx.Provider value={val}>{children}</AnimeListCtx.Provider>
+  return <AnimeListCtx.Provider value={value}>{children}</AnimeListCtx.Provider>
 }

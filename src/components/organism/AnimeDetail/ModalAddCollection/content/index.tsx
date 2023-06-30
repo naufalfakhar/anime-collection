@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { LabelCheckbox, LabelGroup } from '@/components/styles'
-import { TCollections, TMedia } from '@/context/AnimeDetailCtx/types'
 import { useController } from '../useController'
+import { IAnime, ICollection } from '@/types'
 
 export default function ContentModalAddCollection() {
   const {
@@ -15,12 +15,12 @@ export default function ContentModalAddCollection() {
     if (currentCollectionList === null) return
     setPrevSelectedCollection(
       currentCollectionList
-        .filter((collections: TCollections) => {
+        .filter((collections: ICollection) => {
           return collections.animes.some(
-            (anime: TMedia) => anime.id === Media.id
+            (anime: IAnime) => anime.id === Media.id
           )
         })
-        .map((collection: TCollections) => collection.name)
+        .map((collection: ICollection) => collection.name)
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -29,7 +29,7 @@ export default function ContentModalAddCollection() {
 
   return (
     <LabelGroup>
-      {currentCollectionList.map((collections: TCollections, i: number) => {
+      {currentCollectionList.map((collections: ICollection, i: number) => {
         const isChecked = collections.animes.some(
           (anime) => anime.id === Media.id
         )

@@ -1,12 +1,12 @@
 import { Dispatch } from 'react'
-import { TCollections, TMedia } from '../AnimeDetailCtx/types'
+import { IAnime, ICollection } from '@/types'
 
 export type TState = {
   thisCollection: string
-  collections: TCollections[]
+  collections: ICollection[]
   newCollection: {
     name: string
-    animes: TMedia[]
+    animes: IAnime[]
   }
   isUnique: boolean
   collectionAdded: boolean
