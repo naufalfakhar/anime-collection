@@ -1,4 +1,5 @@
-import { useController } from '../useController'
+import { PaginationButton, PaginationGroup } from '@/components/styles'
+import { useController } from './useController'
 
 export default function Pagination() {
   const {
@@ -10,28 +11,39 @@ export default function Pagination() {
   } = useController()
 
   return (
-    <div>
-      {pageInfo.currentPage > 1 && (
-        <button onClick={() => handlePageChangePrev(pageInfo.currentPage)}>
-          prev
-        </button>
+    <PaginationGroup>
+      {pageInfo.currentPage > 1 ? (
+        <PaginationButton
+          onClick={() => handlePageChangePrev(pageInfo.currentPage)}
+        >
+          &lt;
+        </PaginationButton>
+      ) : (
+        <PaginationButton
+          onClick={() => handlePageChangePrev(pageInfo.currentPage)}
+          disabled
+        >
+          &lt;
+        </PaginationButton>
       )}
 
       {pageNumbers.map((pageNumber) => (
-        <button
+        <PaginationButton
           key={pageNumber}
-          disabled={pageInfo.currentPage === pageNumber}
+          active={pageInfo.currentPage === pageNumber}
           onClick={() => handlePageChange(pageNumber)}
         >
           {pageNumber}
-        </button>
+        </PaginationButton>
       ))}
 
       {pageInfo.hasNextPage && (
-        <button onClick={() => handlePageChangeNext(pageInfo.currentPage)}>
-          next
-        </button>
+        <PaginationButton
+          onClick={() => handlePageChangeNext(pageInfo.currentPage)}
+        >
+          &gt;
+        </PaginationButton>
       )}
-    </div>
+    </PaginationGroup>
   )
 }

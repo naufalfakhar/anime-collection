@@ -13,6 +13,11 @@ export const reducer = (state: TState, action: TAction): TState => {
         draft.newCollection = action.newCollection
       })
 
+    case 'SET_NEW_NAME':
+      return produce(state, (draft) => {
+        draft.newName = action.newName
+      })
+
     case 'SET_IS_UNIQUE':
       return produce(state, (draft) => {
         draft.isUnique = action.isUnique
@@ -28,6 +33,11 @@ export const reducer = (state: TState, action: TAction): TState => {
         draft.collectionAdded = action.collectionAdded
       })
 
+    case 'SET_COLLECTION_EDITED':
+      return produce(state, (draft) => {
+        draft.collectionEdited = action.collectionEdited
+      })
+
     case 'SET_COLLECTION_REMOVED':
       return produce(state, (draft) => {
         draft.collectionRemoved = action.collectionRemoved
@@ -36,6 +46,11 @@ export const reducer = (state: TState, action: TAction): TState => {
     case 'SET_SHOW_MODAL_ADD_COLLECTION':
       return produce(state, (draft) => {
         draft.showModalAddCollection = action.showModalAddCollection
+      })
+
+    case 'SET_SHOW_MODAL_EDIT_COLLECTION':
+      return produce(state, (draft) => {
+        draft.showModalEditCollection = action.showModalEditCollection
       })
 
     case 'SET_SHOW_MODAL_REMOVE_COLLECTION':

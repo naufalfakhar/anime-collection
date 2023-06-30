@@ -1,13 +1,11 @@
 import CollectionList from '@/components/organism/CollectionList'
-import { useController } from '@/components/organism/CollectionList/useController'
-import { AnimeListLayout, PageTitle } from '@/components/styles'
+import CollectionListHeader from '@/components/organism/CollectionList/Header'
+import { AnimeListLayout } from '@/components/styles'
 
 export default function CollectionListTemplate() {
-  const { handleOpenModalAddCollection } = useController()
   return (
     <AnimeListLayout>
-      <PageTitle>Collection List</PageTitle>
-      <button onClick={handleOpenModalAddCollection}>add</button>
+      <CollectionListHeader />
       <CollectionList />
     </AnimeListLayout>
   )

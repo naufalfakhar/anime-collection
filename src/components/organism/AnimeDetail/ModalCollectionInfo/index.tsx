@@ -1,4 +1,4 @@
-import { ModalLayout } from '@/components/styles'
+import { Button, ModalHeader, ModalLayout } from '@/components/styles'
 import { useController } from './useController'
 import ContentModalCollectionInfo from './content'
 
@@ -10,9 +10,11 @@ export default function ModalCollectionInfo() {
   return (
     <ModalLayout>
       <div>
-        <div>ModalCollectionInfo</div>
+        <ModalHeader>
+          <p>This Anime Currently in...</p>
+        </ModalHeader>
         <ContentModalCollectionInfo />
-        <button onClick={handleClose}>close</button>
+        <Button onClick={handleClose}>close</Button>
       </div>
     </ModalLayout>
   )

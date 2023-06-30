@@ -6,28 +6,25 @@ import { TCollections } from '@/context/AnimeDetailCtx/types'
 export const useController = () => {
   const {
     state: {
-      collectionAdded,
-      showModalAddCollection: isOpen,
+      newName,
+      collectionEdited,
+      showModalEditCollection: isOpen,
       collections,
       newCollection,
       isUnique,
+      thisCollection,
     },
-    setShowModalAddCollection,
-    setCollectionAdded,
+    setNewName,
+    setShowModalEditCollection,
+    setCollectionEdited,
     setCollections,
-    setNewCollection,
     setIsUnique,
   } = useCollectionListCtx()
 
   const currentCollectionList = getLocalStorage('collection')
 
   const handleClose = () => {
-    setShowModalAddCollection(false)
-  }
-
-  const handleAddToCollection = () => {
-    setCollectionAdded(true)
-    handleClose()
+    setShowModalEditCollection(false)
   }
 
   const checkIfValueIsUnique = (value: string) => {
@@ -40,11 +37,7 @@ export const useController = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     if (/^[a-zA-Z0-9 ]*$/.test(value)) {
-      setNewCollection({
-        ...newCollection,
-        name: value,
-        animes: [],
-      })
+      setNewName(value)
     }
     if (currentCollectionList) {
       const isValueUnique = checkIfValueIsUnique(value)
@@ -52,46 +45,47 @@ export const useController = () => {
     }
   }
 
-  const handleCreate = () => {
-    if (isUnique && newCollection.name.length <= 16) {
-      if (currentCollectionList) {
-        setCollections([...currentCollectionList, newCollection])
-      } else {
-        setCollections([...collections, newCollection])
-      }
-      setCollectionAdded(true)
+  const handleEdit = () => {
+    if (isUnique && newName.length <= 16) {
+      const updatedArr = currentCollectionList.map((obj: TCollections) => {
+        if (obj.name === thisCollection) {
+          return { ...obj, name: newName }
+        }
+        return obj
+      })
+      setCollections(updatedArr)
+      setCollectionEdited(true)
       handleClose()
     } else {
       alert(
-        'Value is not unique or have more than 16 character. Cannot perform create action.'
+        'Value is not unique or have more than 16 character. Cannot perform edit action.'
       )
     }
   }
 
+  console.log(currentCollectionList)
+
   React.useEffect(() => {
-    if (collections.length > 0 && collectionAdded) {
+    if (collections.length > 0 && collectionEdited) {
       postCollection(collections)
-      setCollectionAdded(false)
-      setNewCollection({
-        name: '',
-        animes: [],
-      })
+      setCollectionEdited(false)
+      setNewName('')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionAdded])
+  }, [collectionEdited])
 
   const handleOpenModalNewCollection = () => {
-    setShowModalAddCollection(false)
+    setShowModalEditCollection(false)
   }
   return {
+    newName,
     currentCollectionList,
     isOpen,
     handleClose,
-    handleAddToCollection,
     handleOpenModalNewCollection,
     handleChange,
     newCollection,
     isUnique,
-    handleCreate,
+    handleEdit,
   }
 }

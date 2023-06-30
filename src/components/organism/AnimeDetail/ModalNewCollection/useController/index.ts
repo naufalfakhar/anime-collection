@@ -35,7 +35,7 @@ export const useController = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    if (/^[a-zA-Z0-9]*$/.test(value)) {
+    if (/^[a-zA-Z0-9 ]*$/.test(value)) {
       setNewCollection({
         ...newCollection,
         name: value,
@@ -49,7 +49,7 @@ export const useController = () => {
   }
 
   const handleCreate = () => {
-    if (isUnique) {
+    if (isUnique && newCollection.name.length <= 16) {
       if (currentCollection) {
         setCollections([...currentCollection, newCollection])
       } else {
@@ -58,7 +58,9 @@ export const useController = () => {
       setCollectionsAdded(true)
       handleClose()
     } else {
-      console.log('Value is not unique. Cannot perform create action.')
+      alert(
+        'Value is not unique or have more than 16 character. Cannot perform create action.'
+      )
     }
   }
 

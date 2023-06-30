@@ -1,22 +1,15 @@
 import * as React from 'react'
-import { LabelGroup } from '@/components/styles'
+import { LabelCheckbox, LabelGroup } from '@/components/styles'
 import { TCollections, TMedia } from '@/context/AnimeDetailCtx/types'
 import { useController } from '../useController'
 
 export default function ContentModalAddCollection() {
   const {
     currentCollectionList,
-    prevSelectedCollection,
-    selectedCollection,
-    removedCollection,
     Media,
     handleCheckCollection,
     setPrevSelectedCollection,
   } = useController()
-
-  console.log(selectedCollection, ' selected controller')
-  console.log(prevSelectedCollection, ' prev controller')
-  console.log(removedCollection, ' removed controller')
 
   React.useEffect(() => {
     if (currentCollectionList === null) return
@@ -41,15 +34,15 @@ export default function ContentModalAddCollection() {
           (anime) => anime.id === Media.id
         )
         return (
-          <label key={i}>
+          <LabelCheckbox key={i}>
             <input
               type='checkbox'
               name={collections.name}
               defaultChecked={isChecked}
               onChange={handleCheckCollection}
             />
-            <span>{collections.name}</span>
-          </label>
+            <p>{collections.name}</p>
+          </LabelCheckbox>
         )
       })}
     </LabelGroup>

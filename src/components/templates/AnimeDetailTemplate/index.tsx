@@ -1,10 +1,11 @@
 import AnimeDetail from '@/components/organism/AnimeDetail'
-import { AnimeListLayout, PageTitle } from '@/components/styles'
+import AnimeDetailHeader from '@/components/organism/AnimeDetail/Header'
+import { AnimeListLayout } from '@/components/styles'
 
 export default function AnimeDetailTemplate() {
   return (
     <AnimeListLayout>
-      <PageTitle>Anime Detail</PageTitle>
+      <AnimeDetailHeader />
       <AnimeDetail />
     </AnimeListLayout>
   )

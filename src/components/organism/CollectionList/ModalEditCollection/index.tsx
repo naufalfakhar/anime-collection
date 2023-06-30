@@ -4,12 +4,12 @@ import {
   ModalHeader,
   ModalLayout,
 } from '@/components/styles'
-import ContentModalAddCollection from './content'
 import { useController } from './useController'
+import ContentModalEditCollection from './content'
 import { X } from 'lucide-react'
 
-export default function ModalAddCollection() {
-  const { isOpen, handleClose, handleCreate } = useController()
+export default function ModalEditCollection() {
+  const { isOpen, handleClose, handleEdit } = useController()
 
   if (!isOpen) return null
   console.log('tes')
@@ -18,14 +18,13 @@ export default function ModalAddCollection() {
     <ModalLayout>
       <div>
         <ModalHeader>
-          <p>Create new collection</p>
+          <p>Edit collection</p>
           <ButtonClose onClick={handleClose}>
             <X />
           </ButtonClose>
         </ModalHeader>
-        <ContentModalAddCollection />
-
-        <Button onClick={handleCreate}>create collection</Button>
+        <ContentModalEditCollection />
+        <Button onClick={handleEdit}>edit collection</Button>
       </div>
     </ModalLayout>
   )

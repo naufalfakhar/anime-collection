@@ -1,24 +1,29 @@
-import { ModalLayout } from '@/components/styles'
+import {
+  Button,
+  ButtonClose,
+  ModalHeader,
+  ModalLayout,
+} from '@/components/styles'
 import ContentModalRemoveCollection from './content'
 import { useController } from './useController'
+import { X } from 'lucide-react'
 
 export default function ModalRemoveCollection() {
-  const { isOpen, handleClose, handleRemoveCollection, thisCollection } =
-    useController()
+  const { isOpen, handleClose, handleRemoveCollection } = useController()
 
   if (!isOpen) return null
-
-  console.log(thisCollection)
 
   return (
     <ModalLayout>
       <div>
-        <div>are u sure?</div>
+        <ModalHeader>
+          <p>are u sure want to remove?</p>
+          <ButtonClose onClick={handleClose}>
+            <X />
+          </ButtonClose>
+        </ModalHeader>
         <ContentModalRemoveCollection />
-        <div>
-          <button onClick={handleClose}>close</button>
-          <button onClick={handleRemoveCollection}>Remove</button>
-        </div>
+        <Button onClick={handleRemoveCollection}>Remove</Button>
       </div>
     </ModalLayout>
   )

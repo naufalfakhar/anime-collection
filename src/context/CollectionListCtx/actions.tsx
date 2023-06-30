@@ -22,6 +22,13 @@ export const actions = (
     })
   },
 
+  setNewName: (newName: TState['newName']) => {
+    dispatch({
+      type: 'SET_NEW_NAME',
+      newName,
+    })
+  },
+
   setIsUnique: (isUnique: TState['isUnique']) => {
     dispatch({
       type: 'SET_IS_UNIQUE',
@@ -40,6 +47,13 @@ export const actions = (
     dispatch({
       type: 'SET_COLLECTION_ADDED',
       collectionAdded,
+    })
+  },
+
+  setCollectionEdited: (collectionEdited: TState['collectionEdited']) => {
+    dispatch({
+      type: 'SET_COLLECTION_EDITED',
+      collectionEdited,
     })
   },
 
@@ -65,6 +79,15 @@ export const actions = (
     dispatch({
       type: 'SET_SHOW_MODAL_ADD_COLLECTION',
       showModalAddCollection,
+    })
+  },
+
+  setShowModalEditCollection: (
+    showModalEditCollection: TState['showModalEditCollection']
+  ) => {
+    dispatch({
+      type: 'SET_SHOW_MODAL_EDIT_COLLECTION',
+      showModalEditCollection,
     })
   },
 })

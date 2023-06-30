@@ -1,3 +1,6 @@
+import { useController } from '../useController'
+
 export default function ContentModalRemoveCollection() {
-  return <div>ContentModalRemoveCollection</div>
+  const { thisCollection } = useController()
+  return <div>{thisCollection}</div>
 }

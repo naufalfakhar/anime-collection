@@ -1,6 +1,12 @@
-import { ModalLayout } from '@/components/styles'
+import {
+  Button,
+  ButtonClose,
+  ModalHeader,
+  ModalLayout,
+} from '@/components/styles'
 import { useController } from './useController'
 import ContentModalNewCollection from './content'
+import { X } from 'lucide-react'
 
 export default function ModalNewCollection() {
   const { isOpen, handleClose, handleCreate } = useController()
@@ -10,12 +16,14 @@ export default function ModalNewCollection() {
   return (
     <ModalLayout>
       <div>
-        <div>New Collection </div>
+        <ModalHeader>
+          <p>Let's Create a Collection</p>
+          <ButtonClose onClick={handleClose}>
+            <X />
+          </ButtonClose>
+        </ModalHeader>
         <ContentModalNewCollection />
-        <div>
-          <button onClick={handleClose}>cancel</button>
-          <button onClick={handleCreate}>create</button>
-        </div>
+        <Button onClick={handleCreate}>create</Button>
       </div>
     </ModalLayout>
   )

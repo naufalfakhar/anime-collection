@@ -4,19 +4,24 @@ import { useCollectionListCtx } from '@/context/CollectionListCtx'
 
 export const useController = () => {
   const {
-    state: { collectionRemoved, thisCollection, showModalAddCollection },
-    setShowModalRemoveCollection,
+    state: { collectionRemoved, thisCollection },
     setCollectionRemoved,
     setThisCollection,
     setShowModalAddCollection,
+    setShowModalEditCollection,
+    setShowModalRemoveCollection,
   } = useCollectionListCtx()
-  console.log(showModalAddCollection)
 
   const currentCollectionList = getLocalStorage('collection')
 
   const handleOpenModalRemoveCollection = (name: string) => {
     setThisCollection(name)
     setShowModalRemoveCollection(true)
+  }
+
+  const handleOpenModalEditCollection = (name: string) => {
+    setThisCollection(name)
+    setShowModalEditCollection(true)
   }
 
   const handleOpenModalAddCollection = () => {
@@ -33,7 +38,8 @@ export const useController = () => {
 
   return {
     currentCollectionList,
-    handleOpenModalRemoveCollection,
     handleOpenModalAddCollection,
+    handleOpenModalEditCollection,
+    handleOpenModalRemoveCollection,
   }
 }

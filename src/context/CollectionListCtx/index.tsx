@@ -10,10 +10,13 @@ const initialState: TState = {
     animes: [],
   },
   thisCollection: '',
+  newName: '',
   isUnique: true,
   collectionAdded: false,
+  collectionEdited: false,
   collectionRemoved: false,
   showModalAddCollection: false,
+  showModalEditCollection: false,
   showModalRemoveCollection: false,
 }
 
@@ -22,11 +25,14 @@ const CollectionListCtx = React.createContext<TDefaultValue>({
   dispatch: () => undefined,
   setCollections: () => undefined,
   setNewCollection: () => undefined,
+  setNewName: () => undefined,
   setIsUnique: () => undefined,
   setThisCollection: () => undefined,
   setCollectionAdded: () => undefined,
+  setCollectionEdited: () => undefined,
   setCollectionRemoved: () => undefined,
   setShowModalAddCollection: () => undefined,
+  setShowModalEditCollection: () => undefined,
   setShowModalRemoveCollection: () => undefined,
 })
 
