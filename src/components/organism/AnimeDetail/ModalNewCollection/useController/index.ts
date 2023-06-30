@@ -49,7 +49,11 @@ export const useController = () => {
   }
 
   const handleCreate = () => {
-    if (isUnique && newCollection.name.length <= 16) {
+    if (
+      isUnique &&
+      newCollection.name.length <= 16 &&
+      newCollection.name !== ''
+    ) {
       if (currentCollection) {
         setCollections([...currentCollection, newCollection])
       } else {
@@ -59,7 +63,7 @@ export const useController = () => {
       handleClose()
     } else {
       alert(
-        'Value is not unique or have more than 16 character. Cannot perform create action.'
+        'Title is empty or not unique or have more than 16 character. Cannot perform create action.'
       )
     }
   }

@@ -8,15 +8,8 @@ import {
 import { useController } from '../useController'
 
 export default function ContentModalAddCollection() {
-  const {
-    mediaModal,
-    handleCheckAnime,
-    selectedAnime,
-    newCollection,
-    handleChange,
-  } = useController()
-
-  console.log(selectedAnime)
+  const { mediaModal, handleCheckAnime, newCollection, handleChange } =
+    useController()
 
   return (
     <div>

@@ -64,7 +64,11 @@ export const useController = () => {
   }
 
   const handleCreate = () => {
-    if (isUnique && newCollection.name.length <= 16) {
+    if (
+      isUnique &&
+      newCollection.name.length <= 16 &&
+      newCollection.name !== ''
+    ) {
       if (currentCollectionList) {
         setCollections([...currentCollectionList, newCollection])
       } else {
@@ -74,7 +78,7 @@ export const useController = () => {
       handleClose()
     } else {
       alert(
-        'Value is not unique or have more than 16 character. Cannot perform create action.'
+        'Title is empty or not unique or have more than 16 character. Cannot perform create action.'
       )
     }
   }
@@ -83,6 +87,7 @@ export const useController = () => {
     if (collections.length > 0 && collectionsAdded) {
       postCollection(collections)
       setCollectionsAdded(false)
+      setSelectedAnimeName([])
       setNewCollection({
         name: '',
         animes: [],
