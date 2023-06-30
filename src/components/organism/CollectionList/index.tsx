@@ -16,6 +16,15 @@ export default function CollectionList() {
     handleOpenModalRemoveCollection,
     handleOpenModalEditCollection,
   } = useController()
+
+  if (currentCollectionList === null) {
+    return (
+      <ContentCollectionGroup>
+        <h2>There is no collection</h2>
+      </ContentCollectionGroup>
+    )
+  }
+
   return (
     <ContentCollectionGroup>
       {currentCollectionList.map((collections: ICollection, i: number) => (

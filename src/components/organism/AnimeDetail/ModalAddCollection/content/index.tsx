@@ -25,7 +25,8 @@ export default function ContentModalAddCollection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (currentCollectionList === null) return <div>null</div>
+  if (currentCollectionList === null)
+    return <div>there is no collection yet</div>
 
   return (
     <LabelGroup>
