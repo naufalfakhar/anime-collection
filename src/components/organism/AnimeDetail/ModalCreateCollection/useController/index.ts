@@ -49,23 +49,27 @@ export const useController = () => {
   }
 
   const handleCreate = () => {
-    if (
-      isUnique &&
-      newCollection.name.length <= 16 &&
-      newCollection.name !== ''
-    ) {
-      if (currentCollectionList) {
-        setCollections([...currentCollectionList, newCollection])
-      } else {
-        setCollections([...collections, newCollection])
-      }
-      setCollectionsAdded(true)
-      handleClose()
-    } else {
-      alert(
-        'Title is empty or not unique or have more than 16 character. Cannot perform create action.'
-      )
+    if (newCollection.name === '') {
+      alert('Title shouldnt be empty. Cannot perform create action.')
+      return
     }
+    if (newCollection.name.length > 16) {
+      alert(
+        'Title shouldnt be more than 16 characters. Cannot perform create action.'
+      )
+      return
+    }
+    if (!isUnique) {
+      alert('Title should be unique. Cannot perform create action.')
+      return
+    }
+    if (currentCollectionList) {
+      setCollections([...currentCollectionList, newCollection])
+    } else {
+      setCollections([...collections, newCollection])
+    }
+    setCollectionsAdded(true)
+    handleClose()
   }
 
   React.useEffect(() => {
