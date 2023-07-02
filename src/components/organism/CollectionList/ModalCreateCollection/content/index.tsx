@@ -1,7 +1,7 @@
 import { Input, MaxLength } from '@/components/styles'
 import { useController } from '../useController'
 
-export default function ContentModalAddCollection() {
+export default function ContentModalCreateCollection() {
   const { handleChange, newCollection } = useController()
 
   return (
@@ -13,7 +13,7 @@ export default function ContentModalAddCollection() {
         value={newCollection.name}
         onChange={handleChange}
       />
-      <MaxLength con={newCollection.name.length <= 16 ? false : true}>
+      <MaxLength condition={newCollection.name.length <= 16 ? false : true}>
         <p>max length is 16.</p> {newCollection.name.length}/16
       </MaxLength>
     </form>

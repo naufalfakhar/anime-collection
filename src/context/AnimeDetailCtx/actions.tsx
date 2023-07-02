@@ -12,12 +12,8 @@ export const actions = (
     dispatch({ type: 'SET_ID', id })
   },
 
-  setMedia: (Media: TState['Media']) => {
-    dispatch({ type: 'SET_MEDIA', Media })
-  },
-
-  setSkip: (skip: TState['skip']) => {
-    dispatch({ type: 'SET_SKIP', skip })
+  setCurrentAnime: (currentAnime: TState['currentAnime']) => {
+    dispatch({ type: 'SET_CURRENT_ANIME', currentAnime })
   },
 
   setCollections: (collections: TState['collections']) => {
@@ -40,6 +36,10 @@ export const actions = (
 
   setRemovedCollection: (removedCollection: TState['removedCollection']) => {
     dispatch({ type: 'SET_REMOVED_COLLECTION', removedCollection })
+  },
+
+  setSkip: (skip: TState['skip']) => {
+    dispatch({ type: 'SET_SKIP', skip })
   },
 
   setIsUnique: (isUnique: TState['isUnique']) => {

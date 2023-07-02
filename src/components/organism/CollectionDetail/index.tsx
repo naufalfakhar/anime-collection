@@ -4,14 +4,16 @@ import { IAnime } from '@/types'
 import { Link, useParams } from 'react-router-dom'
 import {
   AnimeDetailGenreGroup,
-  AnimeDetailTitleGroup,
-  CollectionButton,
+  Button,
   CollectionDetailBanner,
   CollectionDetailButton,
-  CollectionDetailEditNameGroup,
+  CollectionDetailCover,
   CollectionDetailInfoGroup,
   CollectionGroup,
-  ContentCollectionDetailGroup,
+  ContentCollectionGroup,
+  Group,
+  InfoGroup,
+  TitleGroup,
 } from '@/components/styles'
 import { Edit2, Trash2 } from 'lucide-react'
 
@@ -34,7 +36,7 @@ export default function CollectionDetail() {
   if (isLoading) return <div>loading...</div>
 
   return (
-    <ContentCollectionDetailGroup>
+    <ContentCollectionGroup>
       <CollectionDetailBanner
         src={
           selectedCollection.animes.map(
@@ -43,49 +45,52 @@ export default function CollectionDetail() {
         }
         alt={selectedCollection.name}
       />
-      <CollectionDetailEditNameGroup>
+      <Group>
         <h2>{selectedCollection.name}</h2>
-        <CollectionButton
-          cc='#f5f5f7'
-          cbc='#1d1d1f'
+        <Button
+          custom-color='#f5f5f7'
+          custom-background-color='#3b82f6'
           onClick={() => handleOpenModalEditCollection(selectedCollection.name)}
         >
           <Edit2 />
-        </CollectionButton>
-      </CollectionDetailEditNameGroup>
+        </Button>
+      </Group>
       <CollectionDetailInfoGroup>
         {selectedCollection.animes.map((anime: IAnime) => (
           <li key={anime.id}>
             <CollectionGroup>
               <Link to={`/anime/${anime.id}`}>
-                <img src={anime.coverImage.large} alt='' />
-                <div>
-                  <h2>{anime.title.romaji}</h2>
-                  <ul>
-                    <li>{anime.season}</li>
-                    <li>{anime.seasonYear}</li>
-                    <li>
-                      alternative title :
-                      <AnimeDetailTitleGroup>
-                        <h2>{anime.title.english}</h2>
-                        <div>|</div>
-                        <h2>{anime.title.native}</h2>
-                      </AnimeDetailTitleGroup>
-                    </li>
-                    <li>episodes : {anime.episodes}</li>
-                    <li>score : {anime.meanScore}</li>
-                    <li>genres : </li>
+                <CollectionDetailCover src={anime.coverImage.large} alt='' />
+                <InfoGroup>
+                  <li>
+                    alternative title :
+                    <TitleGroup>
+                      <h2>{anime.title.english}</h2>
+                      <div>|</div>
+                      <h2>{anime.title.native}</h2>
+                    </TitleGroup>
+                  </li>
+                  <li>type : {anime.type}</li>
+                  <li>format : {anime.format}</li>
+                  <li>episodes : {anime.episodes}</li>
+                  <li>
+                    season : {anime.season} {anime.seasonYear}
+                  </li>
+                  <li>status : {anime.status}</li>
+                  <li>score : {anime.meanScore}</li>
+                  <li>
+                    genres :
                     <AnimeDetailGenreGroup>
                       {anime.genres.map((genre, index) => (
-                        <li key={index}>{genre}</li>
+                        <span key={index}>{genre}</span>
                       ))}
                     </AnimeDetailGenreGroup>
-                  </ul>
-                </div>
+                  </li>
+                </InfoGroup>
               </Link>
               <CollectionDetailButton
-                cc='#f5f5f7'
-                cbc='#dc2626'
+                custom-color='#f5f5f7'
+                custom-background-color='#dc2626'
                 onClick={() => handleOpenModalRemoveAnime(anime.title.romaji)}
               >
                 <Trash2 />
@@ -94,6 +99,6 @@ export default function CollectionDetail() {
           </li>
         ))}
       </CollectionDetailInfoGroup>
-    </ContentCollectionDetailGroup>
+    </ContentCollectionGroup>
   )
 }

@@ -1,4 +1,4 @@
-import ModalAddCollection from '@/components/organism/CollectionList/ModalAddCollection'
+import ModalCreateCollection from '@/components/organism/CollectionList/ModalCreateCollection'
 import ModalEditCollection from '@/components/organism/CollectionList/ModalEditCollection'
 import ModalRemoveCollection from '@/components/organism/CollectionList/ModalRemoveCollection'
 import CollectionListTemplate from '@/components/templates/CollectionListTemplate'
@@ -8,7 +8,7 @@ export default function Collection() {
   return (
     <CollectionListCtxProvider>
       <CollectionListTemplate />
-      <ModalAddCollection />
+      <ModalCreateCollection />
       <ModalEditCollection />
       <ModalRemoveCollection />
     </CollectionListCtxProvider>

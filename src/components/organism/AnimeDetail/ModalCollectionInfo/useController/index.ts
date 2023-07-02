@@ -3,7 +3,11 @@ import { getLocalStorage } from '@/utils'
 
 export const useController = () => {
   const {
-    state: { showModalCollectionInfo: isOpen, Media, prevSelectedCollection },
+    state: {
+      showModalCollectionInfo: isOpen,
+      currentAnime,
+      prevSelectedCollection,
+    },
     setShowModalCollectionInfo,
     setPrevSelectedCollection,
   } = useAnimeDetailCtx()
@@ -15,7 +19,7 @@ export const useController = () => {
   }
 
   return {
-    Media,
+    currentAnime,
     currentCollectionList,
     prevSelectedCollection,
     setPrevSelectedCollection,

@@ -4,8 +4,8 @@ import { useGetAnimeDetail } from '@/GraphQL/getAnimeDetail'
 
 export const useController = () => {
   const {
-    state: { id, Media, collectionsUpdated },
-    setMedia,
+    state: { id, currentAnime },
+    setCurrentAnime,
     setId,
     setShowModalAddCollection,
     setShowModalCollectionInfo,
@@ -13,12 +13,12 @@ export const useController = () => {
     setRemovedCollection,
   } = useAnimeDetailCtx()
 
-  const { loading, error, data, refetch } = useGetAnimeDetail(id)
+  const { loading, data, refetch } = useGetAnimeDetail(id)
 
   React.useEffect(() => {
     if (id !== 0) refetch()
     if (data) {
-      setMedia(data.Media)
+      setCurrentAnime(data.Media)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
@@ -34,13 +34,10 @@ export const useController = () => {
   }
 
   return {
-    collectionsUpdated,
-    Media,
+    loading,
+    currentAnime,
     setId,
     handleOpenModalAddCollection,
     handleOpenModalCollectionInfo,
-    data,
-    loading,
-    error,
   }
 }

@@ -8,11 +8,15 @@ import {
 import ContentModalAddCollection from './content'
 import { useController } from './useController'
 import { X } from 'lucide-react'
-import Pagination from './Pagination'
 
-export default function ModalBulkAdd() {
-  const { isOpen, handleClose, handleOpenModalAddToCollection } =
-    useController()
+export default function ModalAddToCollection() {
+  const {
+    isOpen,
+    currentCollectionList,
+    handleAddToCollection,
+    handleOpenModalCreateCollection,
+    handleClose,
+  } = useController()
 
   if (!isOpen) return null
 
@@ -20,7 +24,7 @@ export default function ModalBulkAdd() {
     <ModalLayout>
       <div>
         <ModalHeader>
-          <p>bulk add collection</p>
+          <p>Add Anime to...</p>
           <ButtonClose onClick={handleClose}>
             <X />
           </ButtonClose>
@@ -28,11 +32,19 @@ export default function ModalBulkAdd() {
 
         <ModalContent>
           <ContentModalAddCollection />
-          <Pagination />
         </ModalContent>
 
-        <Button onClick={handleOpenModalAddToCollection}>
-          add to collection...
+        <Button
+          onClick={handleAddToCollection}
+          disabled={currentCollectionList === null}
+        >
+          add to selected collection
+        </Button>
+        <Button
+          onClick={handleOpenModalCreateCollection}
+          custom-background-color='#a1e5f5'
+        >
+          create new collection
         </Button>
       </div>
     </ModalLayout>

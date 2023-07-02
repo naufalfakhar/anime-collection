@@ -2,23 +2,23 @@ import { useAnimeListCtx } from '@/context/AnimeListCtx'
 
 export const useController = () => {
   const {
-    state: { pageInfo },
-    setPageInfo,
+    state: { pageInfoModal },
+    setPageInfoModal,
   } = useAnimeListCtx()
 
   const maxDisplayed = 5
 
-  let startPage = pageInfo.currentPage - Math.floor(maxDisplayed / 2)
-  let endPage = pageInfo.currentPage + Math.floor(maxDisplayed / 2)
+  let startPage = pageInfoModal.currentPage - Math.floor(maxDisplayed / 2)
+  let endPage = pageInfoModal.currentPage + Math.floor(maxDisplayed / 2)
 
   if (startPage <= 0) {
     endPage += Math.abs(startPage) + 1
     startPage = 1
   }
 
-  if (endPage > pageInfo.lastPage) {
-    startPage -= endPage - pageInfo.lastPage
-    endPage = pageInfo.lastPage
+  if (endPage > pageInfoModal.lastPage) {
+    startPage -= endPage - pageInfoModal.lastPage
+    endPage = pageInfoModal.lastPage
   }
 
   if (startPage <= 0) {
@@ -30,19 +30,19 @@ export const useController = () => {
   )
 
   const handlePageChangePrev = (page: number) => {
-    setPageInfo({ ...pageInfo, currentPage: page - 1 })
+    setPageInfoModal({ ...pageInfoModal, currentPage: page - 1 })
   }
 
   const handlePageChange = (page: number) => {
-    setPageInfo({ ...pageInfo, currentPage: page })
+    setPageInfoModal({ ...pageInfoModal, currentPage: page })
   }
 
   const handlePageChangeNext = (page: number) => {
-    setPageInfo({ ...pageInfo, currentPage: page + 1 })
+    setPageInfoModal({ ...pageInfoModal, currentPage: page + 1 })
   }
 
   return {
-    pageInfo,
+    pageInfoModal,
     pageNumbers,
     handlePageChange,
     handlePageChangeNext,

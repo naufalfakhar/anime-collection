@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonClose,
+  ModalContent,
   ModalHeader,
   ModalLayout,
 } from '@/components/styles'
@@ -22,8 +23,18 @@ export default function ModalRemoveCollection() {
             <X />
           </ButtonClose>
         </ModalHeader>
-        <ContentModalRemoveCollection />
-        <Button onClick={handleRemoveCollection}>Remove</Button>
+
+        <ModalContent>
+          <ContentModalRemoveCollection />
+        </ModalContent>
+
+        <Button
+          onClick={handleRemoveCollection}
+          custom-color='#f5f5f7'
+          custom-background-color='#dc2626'
+        >
+          Remove
+        </Button>
       </div>
     </ModalLayout>
   )

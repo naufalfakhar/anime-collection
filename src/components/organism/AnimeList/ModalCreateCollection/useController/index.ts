@@ -1,33 +1,33 @@
 import * as React from 'react'
-import { useAnimeDetailCtx } from '@/context/AnimeDetailCtx'
+import { useAnimeListCtx } from '@/context/AnimeListCtx'
 import { postCollection, getLocalStorage } from '@/utils'
 import { ICollection } from '@/types'
 
 export const useController = () => {
   const {
     state: {
-      Media,
+      showModalCreateCollection: isOpen,
+      selectedAnime,
       collections,
       newCollection,
       isUnique,
-      collectionsAdded,
-      showModalNewCollection: isOpen,
+      collectionAdded,
     },
     setCollections,
     setNewCollection,
     setIsUnique,
-    setCollectionsAdded,
-    setShowModalNewCollection,
-  } = useAnimeDetailCtx()
+    setCollectionAdded,
+    setShowModalCreateCollection,
+  } = useAnimeListCtx()
 
-  const currentCollection = getLocalStorage('collection')
+  const currentCollectionList = getLocalStorage('collection')
 
   const handleClose = () => {
-    setShowModalNewCollection(false)
+    setShowModalCreateCollection(false)
   }
 
   const checkIfValueIsUnique = (value: string) => {
-    const existingValues = currentCollection.map(
+    const existingValues = currentCollectionList.map(
       (item: ICollection) => item.name
     )
     return !existingValues.includes(value)
@@ -39,10 +39,10 @@ export const useController = () => {
       setNewCollection({
         ...newCollection,
         name: value,
-        animes: [Media],
+        animes: selectedAnime,
       })
     }
-    if (currentCollection) {
+    if (currentCollectionList) {
       const isValueUnique = checkIfValueIsUnique(value)
       setIsUnique(isValueUnique)
     }
@@ -54,12 +54,12 @@ export const useController = () => {
       newCollection.name.length <= 16 &&
       newCollection.name !== ''
     ) {
-      if (currentCollection) {
-        setCollections([...currentCollection, newCollection])
+      if (currentCollectionList) {
+        setCollections([...currentCollectionList, newCollection])
       } else {
         setCollections([...collections, newCollection])
       }
-      setCollectionsAdded(true)
+      setCollectionAdded(true)
       handleClose()
     } else {
       alert(
@@ -69,16 +69,18 @@ export const useController = () => {
   }
 
   React.useEffect(() => {
-    if (collections.length > 0 && collectionsAdded) {
+    if (collections.length > 0 && collectionAdded) {
       postCollection(collections)
-      setCollectionsAdded(false)
+      setCollectionAdded(false)
+      //   setSelectedAnime([])
+      //   setSelectedAnimeName([])
       setNewCollection({
         name: '',
         animes: [],
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectionsAdded])
+  }, [collectionAdded])
 
   return {
     isUnique,

@@ -3,7 +3,7 @@ import { useController } from './useController'
 
 export default function Pagination() {
   const {
-    pageInfo,
+    pageInfoModal,
     pageNumbers,
     handlePageChange,
     handlePageChangeNext,
@@ -12,15 +12,15 @@ export default function Pagination() {
 
   return (
     <PaginationGroup>
-      {pageInfo.currentPage > 1 ? (
+      {pageInfoModal.currentPage > 1 ? (
         <PaginationButton
-          onClick={() => handlePageChangePrev(pageInfo.currentPage)}
+          onClick={() => handlePageChangePrev(pageInfoModal.currentPage)}
         >
           &lt;
         </PaginationButton>
       ) : (
         <PaginationButton
-          onClick={() => handlePageChangePrev(pageInfo.currentPage)}
+          onClick={() => handlePageChangePrev(pageInfoModal.currentPage)}
           disabled
         >
           &lt;
@@ -30,22 +30,22 @@ export default function Pagination() {
       {pageNumbers.map((pageNumber) => (
         <PaginationButton
           key={pageNumber}
-          condition={pageInfo.currentPage === pageNumber}
+          condition={pageInfoModal.currentPage === pageNumber}
           onClick={() => handlePageChange(pageNumber)}
         >
           {pageNumber}
         </PaginationButton>
       ))}
 
-      {pageInfo.hasNextPage ? (
+      {pageInfoModal.hasNextPage ? (
         <PaginationButton
-          onClick={() => handlePageChangeNext(pageInfo.currentPage)}
+          onClick={() => handlePageChangeNext(pageInfoModal.currentPage)}
         >
           &gt;
         </PaginationButton>
       ) : (
         <PaginationButton
-          onClick={() => handlePageChangeNext(pageInfo.currentPage)}
+          onClick={() => handlePageChangeNext(pageInfoModal.currentPage)}
           disabled
         >
           &gt;
