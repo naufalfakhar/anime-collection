@@ -37,32 +37,39 @@ export const ModalLayout = styled.div`
   position: fixed;
   inset: 0;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 50%);
   z-index: 100;
   > div {
+    width: 320px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-width: 250px;
-    max-width: 80vw;
     padding: 1rem 1.5rem;
-    border-radius: 0.5rem;
-    background-color: #dedede;
-    @media (prefers-color-scheme: dark) {
-      background-color: #212121;
-    }
+    border-radius: 1rem;
+    background-color: #212121;
   }
 `
 // Region Layout End
 
-export const Header = styled.header`
+interface CustomProps extends React.HTMLProps<HTMLButtonElement> {
+  condition?: boolean
+  'desktop-padding-left'?: string
+  'desktop-padding-right'?: string
+  'custom-color'?: string
+  'custom-background-color'?: string
+}
+
+export const Header = styled.header<CustomProps>`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (min-width: 1024px) {
+    padding-left: ${(props) => props['desktop-padding-left'] ?? '0'};
+    padding-right: ${(props) => props['desktop-padding-right'] ?? '0'};
+  }
 `
 
 export const PageTitle = styled.h1`
@@ -70,6 +77,39 @@ export const PageTitle = styled.h1`
   font-weight: 700;
   @media (min-width: 1024px) {
     font-size: 32px;
+  }
+`
+
+export const Group = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`
+
+export const IconButton = styled.button<CustomProps>`
+  max-width: 40px;
+  max-height: 40px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: ${(props) => props['custom-color'] ?? '#52525b'};
+  background-color: ${(props) => props['custom-background-color'] ?? '#f5f5f7'};
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+`
+
+export const CollectionListButton = styled.button`
+  max-height: 40px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  color: #f5f5f7;
+  background-color: #1d1d1f;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
   }
 `
 
@@ -93,18 +133,35 @@ export const Card = styled.li`
     display: inline-block;
     width: 100%;
     height: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
   }
 `
 
-export const CardImage = styled.img`
+export const CardLoading = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 1rem;
+  height: 230px;
+  border-radius: 0.5rem;
+  background-color: #334155;
+  @media (min-width: 1024px) {
+    height: 380px;
+  }
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
 `
 
 export const CardOverlay = styled.div`
-  border-radius: 1rem;
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -116,9 +173,9 @@ export const CardOverlay = styled.div`
   gap: 0.5rem;
   background-image: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.9) 20%,
-    rgba(0, 0, 0, 0.5) 40%,
-    rgba(0, 0, 0, 0.1) 60%
+    rgba(29, 29, 31, 1) 20%,
+    rgba(29, 29, 31, 0.5) 40%,
+    rgba(29, 29, 31, 0) 80%
   );
 `
 
@@ -128,11 +185,6 @@ export const CardTitle = styled.h2`
   @media (min-width: 1024px) {
     font-size: 20px;
   }
-`
-
-export const CardSpanGroup = styled.div`
-  display: flex;
-  gap: 0.5rem;
 `
 
 export const CardSpan = styled.span`
@@ -148,63 +200,25 @@ export const CardSpan = styled.span`
   min-width: 50px;
   @media (min-width: 1024px) {
     font-size: 14px;
-    padding: 4px 6px;
-  }
-`
-
-export const CardLoading = styled.li`
-  > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 230px;
-    @media (min-width: 1024px) {
-      height: 380px;
-    }
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    @keyframes pulse {
-      0%,
-      100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
-      }
-    }
-    > div {
-      border-radius: 0.5rem;
-      height: 250px;
-      width: 100%;
-      background-color: #334155;
-      @media (min-width: 1024px) {
-        height: 380px;
-      }
-    }
+    padding: 6px 8px;
   }
 `
 
 export const PaginationGroup = styled.div`
-  display: inline-grid;
-  grid-template-columns: repeat(7, 1fr);
+  display: flex;
+  justify-content: center;
   margin-top: 1rem;
-  font-size: 0.8rem;
+  font-size: 14px;
 `
 
-interface ButtonProps {
-  cbc?: string
-  cc?: string
-  cn?: boolean
-}
-
-export const PaginationButton = styled.button<ButtonProps>`
+export const PaginationButton = styled.button<CustomProps>`
   width: 30px;
-  padding: 0.25rem;
+  height: 30px;
   border: none;
-  background-color: ${(props) => (props.cn ? '#94a3b8' : '#f5f5f7')};
-  color: ${(props) => (props.cn ? '#f5f5f7' : '#1d1d1f')};
+  background-color: ${(props) => (props.condition ? '#94a3b8' : '#f5f5f7')};
+  color: ${(props) => (props.condition ? '#f5f5f7' : '#1d1d1f')};
   &:hover {
-    cursor: ${(props) => (props.cn ? 'not-allowed' : 'pointer')};
+    cursor: ${(props) => (props.condition ? 'normal' : 'pointer')};
   }
   &:disabled {
     opacity: 0.5;
@@ -212,10 +226,108 @@ export const PaginationButton = styled.button<ButtonProps>`
   }
 `
 
-export const AnimeDetailBanner = styled.img`
+export const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  text-transform: capitalize;
+  > p {
+    font-size: 14px;
+    @media (min-width: 1024px) {
+      font-size: 16px;
+    }
+  }
+`
+
+export const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem;
+`
+
+export const TextOverflow = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+export const Button = styled.button<CustomProps>`
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  z-index: 10;
+  color: ${(props) => props['custom-color'] ?? '#1d1d1f'};
+  background-color: ${(props) => props['custom-background-color'] ?? '#51e5a1'};
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`
+
+export const ModalContentLoading = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 25px;
+  border-radius: 0.5rem;
+  background-color: #334155;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+`
+export const Banner = styled.div`
+  position: relative;
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  overflow: hidden;
+  > div {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      to top,
+      rgba(29, 29, 31, 0.8) 0%,
+      rgba(29, 29, 31, 0) 90%
+    );
+  }
+`
+
+export const Title = styled.h2`
+  font-size: 16px;
+  font-weight: 700;
+  @media (min-width: 1024px) {
+    font-size: 24px;
+  }
+`
+
+export const TitleGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  @media (min-width: 1024px) {
+    display: inline-flex;
+    padding-left: 0.5rem;
+  }
+  > h2 {
+    font-size: 10px;
+    @media (min-width: 1024px) {
+      font-size: 14px;
+    }
+  }
 `
 
 export const AnimeDetailContent = styled.div`
@@ -237,8 +349,9 @@ export const AnimeDetailContentGroup = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding-left: 170px;
+  padding-top: 200px;
   @media (min-width: 1024px) {
+    padding-top: 10px;
     padding-left: 310px;
     align-items: start;
   }
@@ -246,38 +359,20 @@ export const AnimeDetailContentGroup = styled.div`
 
 export const AnimeDetailCoverImage = styled.img`
   position: absolute;
-  left: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   top: -50px;
   width: 150px;
   height: 230px;
   object-fit: cover;
   border-radius: 1rem;
   @media (min-width: 1024px) {
+    transform: translateX(0);
     width: 250px;
     height: 330px;
     left: 50px;
     top: -100px;
   }
-`
-
-export const AnimeDetailTitle = styled.h2`
-  font-size: 16px;
-  font-weight: 700;
-  @media (min-width: 1024px) {
-    font-size: 24px;
-  }
-`
-
-export const AnimeDetailTitleGroup = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-  > h2 {
-    font-size: 10px;
-    @media (min-width: 1024px) {
-      font-size: 14px;
-    }
 `
 
 export const AnimeDetailDescriptionGroup = styled.div`
@@ -302,7 +397,7 @@ export const AnimeDetailDescriptionGroup = styled.div`
   }
 `
 
-export const AnimeDetailInfoGroup = styled.ul`
+export const InfoGroup = styled.ul`
   width: 100%;
   position: relative;
   display: flex;
@@ -313,25 +408,7 @@ export const AnimeDetailInfoGroup = styled.ul`
     gap: 0.5rem;
   }
   > li {
-    font-size: 14px;
-    @media (min-width: 1024px) {
-      font-size: 16px;
-    }
-  }
-`
-export const CollectionDetailInfoGroup = styled.ul`
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: start;
-  gap: 1rem;
-  @media (min-width: 1024px) {
-    gap: 1.5rem;
-  }
-  > li {
-    width: 100%;
+    text-transform: capitalize;
     font-size: 14px;
     @media (min-width: 1024px) {
       font-size: 16px;
@@ -339,12 +416,14 @@ export const CollectionDetailInfoGroup = styled.ul`
   }
 `
 
-export const AnimeDetailGenreGroup = styled.ul`
-  display: flex;
+export const AnimeDetailGenreGroup = styled.div`
+  display: inline-flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   font-size: 10px;
-  > li {
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  > span {
     padding: 4px 6px;
     border-radius: 0.5rem;
     border: 1px solid #f5f5f7;
@@ -380,56 +459,12 @@ export const AnimeDetailButton = styled.button`
   }
 `
 
-export const CollectionListButton = styled.button`
-  max-height: 40px;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  color: #f5f5f7;
-  background-color: #1d1d1f;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
-  }
-`
-
-export const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-`
-
-export const Button = styled.button<ButtonProps>`
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  z-index: 10;
-  background-color: #f5f5f7;
-  color: #1d1d1f;
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
-  }
-`
-
 export const ButtonClose = styled.button`
   border: none;
   background-color: transparent;
   color: #f5f5f7;
   &:hover {
     cursor: pointer;
-  }
-`
-
-export const ModalHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.5rem;
-  > h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
   }
 `
 
@@ -440,35 +475,25 @@ export const ContentCollectionInfo = styled.ul`
   > li {
     border: 1px solid #dedede;
     padding: 0.5rem;
+    > a {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 `
 
-export const LabelGroup = styled.div`
+export const GroupCol = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-`
-export const BulkContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  overflow: auto;
-  max-height: 300px;
-`
-export const BulkGroup = styled.div`
-  display: flex;
-  items-align: center;
-  gap: 0.5rem;
 `
 
 export const LabelCheckbox = styled.label`
   display: flex;
   items-align: center;
   gap: 0.5rem;
-  > input {
-    width: 20px;
-    height: 20px;
-  }
 `
 
 export const Input = styled.input`
@@ -482,26 +507,11 @@ export const Input = styled.input`
   }
 `
 
-export const InputBulk = styled.input`
-  width: 50%;
-  padding: 0.5rem;
-  border: 1px solid #dedede;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  &:focus {
-    outline: none;
-  }
-`
-
-interface divProps {
-  con?: boolean | undefined
-}
-
-export const MaxLength = styled.div<divProps>`
+export const MaxLength = styled.div<CustomProps>`
   display: flex;
   justify-content: space-between;
   font-size: 0.75rem;
-  color: ${(props) => (props.con ? 'red' : '#f5f5f7')};
+  color: ${(props) => (props.condition ? 'red' : '#f5f5f7')};
   margin-top: 0.5rem;
 `
 
@@ -512,28 +522,24 @@ export const ContentCollectionGroup = styled.div`
   gap: 1rem;
 `
 
-export const ContentCollectionDetailGroup = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
-
 export const CollectionGroup = styled.div`
   position: relative;
-  border-radius: 0.5rem;
   display: flex;
   gap: 0.5rem;
+  border-radius: 0.5rem;
   border: 1px solid #dedede;
   > a {
     display: flex;
-    align-items: start;
-    width: 100%;
-    > img {
-      border-radius: 0.5rem 0 0 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: 1024px) {
+      flex-direction: row;
+      align-items: start;
     }
-    > div {
-      width: 50%;
+    width: 100%;
+    gap: 1rem;
+    overflow: hidden;
+    > ul {
       overflow: hidden;
       padding: 1rem;
       > h2 {
@@ -543,11 +549,58 @@ export const CollectionGroup = styled.div`
   }
 `
 
+export const CollectionListGroup = styled.div`
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dedede;
+  > a {
+    display: flex;
+    align-items: start;
+    width: 100%;
+    gap: 1rem;
+    overflow: hidden;
+    > div {
+      margin-top: 1rem;
+    }
+  }
+`
+
+export const CollectionDetailInfoGroup = styled.ul`
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+  @media (min-width: 1024px) {
+    gap: 1.5rem;
+  }
+  > li {
+    width: 100%;
+    font-size: 14px;
+    @media (min-width: 1024px) {
+      font-size: 16px;
+    }
+  }
+`
+
 export const CollectionListBanner = styled.img`
   width: 50%;
   height: 200px;
   object-fit: cover;
   border-radius: 0.5rem 0 0 0.5rem;
+`
+
+export const CollectionDetailCover = styled.img`
+  object-fit: cover;
+  border-radius: 0.5rem 0 0 0.5rem;
+  height: 300px;
+  @media (min-width: 1024px) {
+    width: 25%;
+  }
 `
 
 export const CollectionDetailBanner = styled.img`
@@ -565,43 +618,20 @@ export const CollectionButtonGroup = styled.div`
   align-items: center;
   gap: 0.5rem;
 `
-export const CollectionButton = styled.button<ButtonProps>`
-  max-height: 40px;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  color: ${(props) => props.cc};
-  background-color: ${(props) => props.cbc};
-  &:hover {
-    cursor: pointer;
-    opacity: 0.8;
-  }
-`
 
-export const CollectionDetailButton = styled.button<ButtonProps>`
-  postion: absolute;
-  top: 1rem;
+export const CollectionDetailButton = styled.button<CustomProps>`
+  position: absolute;
+  bottom: 1rem;
   right: 1rem;
+  z-index: 10;
   max-height: 40px;
   padding: 0.5rem;
   border: none;
   border-radius: 0.5rem;
-  color: ${(props) => props.cc};
-  background-color: ${(props) => props.cbc};
+  color: ${(props) => props['custom-color']};
+  background-color: ${(props) => props['custom-background-color']};
   &:hover {
     cursor: pointer;
     opacity: 0.8;
   }
-`
-
-export const CollectionDetailEditNameGroup = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`
-
-export const CollectionDetailGroup = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 `

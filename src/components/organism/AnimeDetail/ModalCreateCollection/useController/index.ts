@@ -6,7 +6,7 @@ import { ICollection } from '@/types'
 export const useController = () => {
   const {
     state: {
-      Media,
+      currentAnime,
       collections,
       newCollection,
       isUnique,
@@ -20,14 +20,14 @@ export const useController = () => {
     setShowModalNewCollection,
   } = useAnimeDetailCtx()
 
-  const currentCollection = getLocalStorage('collection')
+  const currentCollectionList = getLocalStorage('collection')
 
   const handleClose = () => {
     setShowModalNewCollection(false)
   }
 
   const checkIfValueIsUnique = (value: string) => {
-    const existingValues = currentCollection.map(
+    const existingValues = currentCollectionList.map(
       (item: ICollection) => item.name
     )
     return !existingValues.includes(value)
@@ -39,33 +39,37 @@ export const useController = () => {
       setNewCollection({
         ...newCollection,
         name: value,
-        animes: [Media],
+        animes: [currentAnime],
       })
     }
-    if (currentCollection) {
+    if (currentCollectionList) {
       const isValueUnique = checkIfValueIsUnique(value)
       setIsUnique(isValueUnique)
     }
   }
 
   const handleCreate = () => {
-    if (
-      isUnique &&
-      newCollection.name.length <= 16 &&
-      newCollection.name !== ''
-    ) {
-      if (currentCollection) {
-        setCollections([...currentCollection, newCollection])
-      } else {
-        setCollections([...collections, newCollection])
-      }
-      setCollectionsAdded(true)
-      handleClose()
-    } else {
-      alert(
-        'Title is empty or not unique or have more than 16 character. Cannot perform create action.'
-      )
+    if (newCollection.name === '') {
+      alert('Title shouldnt be empty. Cannot perform create action.')
+      return
     }
+    if (newCollection.name.length > 16) {
+      alert(
+        'Title shouldnt be more than 16 characters. Cannot perform create action.'
+      )
+      return
+    }
+    if (!isUnique) {
+      alert('Title should be unique. Cannot perform create action.')
+      return
+    }
+    if (currentCollectionList) {
+      setCollections([...currentCollectionList, newCollection])
+    } else {
+      setCollections([...collections, newCollection])
+    }
+    setCollectionsAdded(true)
+    handleClose()
   }
 
   React.useEffect(() => {
@@ -81,11 +85,8 @@ export const useController = () => {
   }, [collectionsAdded])
 
   return {
-    isUnique,
-    collections,
-    newCollection,
-    setNewCollection,
     isOpen,
+    newCollection,
     handleChange,
     handleCreate,
     handleClose,

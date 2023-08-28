@@ -31,6 +31,9 @@ export const GET_ANIME = gql`
         meanScore
         season
         seasonYear
+        type
+        format
+        status
       }
     }
   }
@@ -59,6 +62,9 @@ export const GET_ANIME_DETAIL = gql`
       meanScore
       season
       seasonYear
+      type
+      format
+      status
     }
   }
 `

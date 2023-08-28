@@ -1,46 +1,37 @@
 import {
-  BulkContent,
-  BulkGroup,
-  Input,
-  LabelGroup,
-  MaxLength,
+  LabelCheckbox,
+  GroupCol,
+  ModalContentLoading,
+  TextOverflow,
 } from '@/components/styles'
 import { useController } from '../useController'
 
 export default function ContentModalAddCollection() {
-  const { mediaModal, handleCheckAnime, newCollection, handleChange } =
-    useController()
+  const { loading, animeListModal, handleCheckAnime } = useController()
+
+  if (loading)
+    return (
+      <GroupCol>
+        {Array.from(Array(10).keys()).map((_, i) => (
+          <ModalContentLoading key={i} />
+        ))}
+      </GroupCol>
+    )
 
   return (
-    <div>
-      <form>
-        <Input
-          type='text'
-          placeholder='title'
-          name='name'
-          value={newCollection.name}
-          onChange={handleChange}
-        />
-        <MaxLength con={newCollection.name.length <= 16 ? false : true}>
-          <p>max length is 16.</p> {newCollection.name.length}/16
-        </MaxLength>
-      </form>
-      <BulkContent>
-        <LabelGroup>
-          {mediaModal.map((media) => {
-            return (
-              <BulkGroup key={media.id}>
-                <input
-                  type='checkbox'
-                  name={media.title.romaji}
-                  onChange={handleCheckAnime}
-                />
-                <p>{media.title.romaji}</p>
-              </BulkGroup>
-            )
-          })}
-        </LabelGroup>
-      </BulkContent>
-    </div>
+    <GroupCol>
+      {animeListModal.map((media) => {
+        return (
+          <LabelCheckbox key={media.id}>
+            <input
+              type='checkbox'
+              name={media.title.romaji}
+              onChange={handleCheckAnime}
+            />
+            <TextOverflow>{media.title.romaji}</TextOverflow>
+          </LabelCheckbox>
+        )
+      })}
+    </GroupCol>
   )
 }

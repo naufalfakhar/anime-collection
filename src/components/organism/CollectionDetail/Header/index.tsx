@@ -1,6 +1,7 @@
-import { Header, PageTitle } from '@/components/styles'
+import { Header, IconButton, PageTitle } from '@/components/styles'
 import { Link } from 'react-router-dom'
 import { useController } from '../useController'
+import { Archive, Home } from 'lucide-react'
 
 export default function CollectionDetailHeader() {
   const { isLoading } = useController()
@@ -9,9 +10,17 @@ export default function CollectionDetailHeader() {
 
   return (
     <Header>
-      <Link to={'/'}>AniCollect</Link>
+      <Link to={'/'}>
+        <IconButton>
+          <Home />
+        </IconButton>
+      </Link>
       <PageTitle>Collection Detail</PageTitle>
-      <Link to={'/collection'}>Collection</Link>
+      <Link to={'/collection'}>
+        <IconButton>
+          <Archive />
+        </IconButton>
+      </Link>
     </Header>
   )
 }

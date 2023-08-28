@@ -1,15 +1,15 @@
-import ModalAddCollection from '@/components/organism/AnimeDetail/ModalAddCollection'
-import ModalCollectionInfo from '@/components/organism/AnimeDetail/ModalCollectionInfo'
-import ModalNewCollection from '@/components/organism/AnimeDetail/ModalNewCollection'
-import AnimeDetailTemplate from '@/components/templates/AnimeDetailTemplate'
 import { AnimeDetailCtxProvider } from '@/context/AnimeDetailCtx'
+import AnimeDetailTemplate from '@/components/templates/AnimeDetailTemplate'
+import ModalCollectionInfo from '@/components/organism/AnimeDetail/ModalCollectionInfo'
+import ModalCreateCollection from '@/components/organism/AnimeDetail/ModalCreateCollection'
+import ModalAddToCollection from '@/components/organism/AnimeDetail/ModalAddToCollection'
 
 export default function Detail() {
   return (
     <AnimeDetailCtxProvider>
       <AnimeDetailTemplate />
-      <ModalAddCollection />
-      <ModalNewCollection />
+      <ModalAddToCollection />
+      <ModalCreateCollection />
       <ModalCollectionInfo />
     </AnimeDetailCtxProvider>
   )

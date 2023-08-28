@@ -3,10 +3,10 @@ import { useAnimeListCtx } from '@/context/AnimeListCtx'
 export const useController = () => {
   const {
     state: { pageInfo },
-    setPagination,
+    setPageInfo,
   } = useAnimeListCtx()
 
-  const maxDisplayed = 5 // Maximum number of pages to display
+  const maxDisplayed = 5
 
   let startPage = pageInfo.currentPage - Math.floor(maxDisplayed / 2)
   let endPage = pageInfo.currentPage + Math.floor(maxDisplayed / 2)
@@ -28,16 +28,17 @@ export const useController = () => {
   const pageNumbers = Array.from(Array(endPage - startPage + 1)).map(
     (_, i) => startPage + i
   )
+
   const handlePageChangePrev = (page: number) => {
-    setPagination({ ...pageInfo, currentPage: page - 1 })
+    setPageInfo({ ...pageInfo, currentPage: page - 1 })
   }
 
   const handlePageChange = (page: number) => {
-    setPagination({ ...pageInfo, currentPage: page })
+    setPageInfo({ ...pageInfo, currentPage: page })
   }
 
   const handlePageChangeNext = (page: number) => {
-    setPagination({ ...pageInfo, currentPage: page + 1 })
+    setPageInfo({ ...pageInfo, currentPage: page + 1 })
   }
 
   return {

@@ -2,17 +2,17 @@ import * as React from 'react'
 import { useParams } from 'react-router-dom'
 import { useController } from './useController'
 import {
-  AnimeDetailBanner,
-  AnimeDetailButton,
   AnimeDetailButtonGroup,
   AnimeDetailContent,
   AnimeDetailContentGroup,
   AnimeDetailCoverImage,
   AnimeDetailDescriptionGroup,
   AnimeDetailGenreGroup,
-  AnimeDetailInfoGroup,
-  AnimeDetailTitle,
-  AnimeDetailTitleGroup,
+  Banner,
+  IconButton,
+  InfoGroup,
+  Title,
+  TitleGroup,
 } from '@/components/styles'
 import { Plus, Info } from 'lucide-react'
 
@@ -20,7 +20,7 @@ export default function AnimeDetail() {
   const { id } = useParams<{ id: string }>()
 
   const {
-    Media,
+    currentAnime,
     loading,
     setId,
     handleOpenModalAddCollection,
@@ -41,44 +41,60 @@ export default function AnimeDetail() {
     episodes,
     genres,
     meanScore,
-  } = Media
+    type,
+    format,
+    status,
+    season,
+    seasonYear,
+  } = currentAnime
 
   return (
     <div>
-      <AnimeDetailBanner
-        src={bannerImage ?? '/no-image.png'}
-        alt={title.romaji}
-      />
+      <Banner>
+        <img src={bannerImage ?? '/no-image.png'} alt={title.romaji} />
+        <div></div>
+      </Banner>
       <AnimeDetailContent>
         <AnimeDetailCoverImage src={coverImage.large} alt={title.romaji} />
         <AnimeDetailContentGroup>
-          <AnimeDetailTitle>{title.romaji}</AnimeDetailTitle>
-          <AnimeDetailInfoGroup>
+          <Title>{title.romaji}</Title>
+          <InfoGroup>
             <li>
               alternative title :
-              <AnimeDetailTitleGroup>
+              <TitleGroup>
                 <h2>{title.english}</h2>
                 <div>|</div>
                 <h2>{title.native}</h2>
-              </AnimeDetailTitleGroup>
+              </TitleGroup>
             </li>
+            <li>type : {type}</li>
+            <li>format : {format}</li>
             <li>episodes : {episodes}</li>
+            <li>
+              season : {season} {seasonYear}
+            </li>
+            <li>status : {status}</li>
             <li>score : {meanScore}</li>
-            <li>genres : </li>
-            <AnimeDetailGenreGroup>
-              {genres.map((genre, index) => (
-                <li key={index}>{genre}</li>
-              ))}
-            </AnimeDetailGenreGroup>
+            <li>
+              genres :
+              <AnimeDetailGenreGroup>
+                {genres.map((genre, index) => (
+                  <span key={index}>{genre}</span>
+                ))}
+              </AnimeDetailGenreGroup>
+            </li>
             <AnimeDetailButtonGroup>
-              <AnimeDetailButton onClick={handleOpenModalCollectionInfo}>
+              <IconButton onClick={handleOpenModalCollectionInfo}>
                 <Info />
-              </AnimeDetailButton>
-              <AnimeDetailButton onClick={handleOpenModalAddCollection}>
+              </IconButton>
+              <IconButton
+                onClick={handleOpenModalAddCollection}
+                custom-background-color='#51e5a1'
+              >
                 <Plus />
-              </AnimeDetailButton>
+              </IconButton>
             </AnimeDetailButtonGroup>
-          </AnimeDetailInfoGroup>
+          </InfoGroup>
         </AnimeDetailContentGroup>
 
         <AnimeDetailDescriptionGroup>

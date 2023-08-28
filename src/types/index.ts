@@ -26,6 +26,9 @@ export interface IAnime {
   episodes: number
   genres: string[]
   meanScore: number
+  type: string
+  format: string
+  status: string
 }
 
 export interface ICollection {

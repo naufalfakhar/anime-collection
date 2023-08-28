@@ -1,12 +1,21 @@
-import { Header, PageTitle } from '@/components/styles'
+import { Header, IconButton, PageTitle } from '@/components/styles'
+import { Archive, Home } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function AnimeDetailHeader() {
   return (
     <Header>
-      <Link to={'/'}>AniCollect</Link>
+      <Link to={'/'}>
+        <IconButton>
+          <Home />
+        </IconButton>
+      </Link>
       <PageTitle>Anime Detail</PageTitle>
-      <Link to={'/collection'}>Collection</Link>
+      <Link to={'/collection'}>
+        <IconButton>
+          <Archive />
+        </IconButton>
+      </Link>
     </Header>
   )
 }

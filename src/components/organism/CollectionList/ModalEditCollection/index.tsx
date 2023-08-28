@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonClose,
+  ModalContent,
   ModalHeader,
   ModalLayout,
 } from '@/components/styles'
@@ -22,8 +23,18 @@ export default function ModalEditCollection() {
             <X />
           </ButtonClose>
         </ModalHeader>
-        <ContentModalEditCollection />
-        <Button onClick={handleEdit}>edit collection</Button>
+
+        <ModalContent>
+          <ContentModalEditCollection />
+        </ModalContent>
+
+        <Button
+          onClick={handleEdit}
+          custom-color='#f5f5f7'
+          custom-background-color='#3b82f6'
+        >
+          edit collection
+        </Button>
       </div>
     </ModalLayout>
   )

@@ -8,14 +8,9 @@ export const reducer = (state: TState, action: TAction): TState => {
         draft.id = action.id
       })
 
-    case 'SET_MEDIA':
+    case 'SET_CURRENT_ANIME':
       return produce(state, (draft) => {
-        draft.Media = action.Media
-      })
-
-    case 'SET_SKIP':
-      return produce(state, (draft) => {
-        draft.skip = action.skip
+        draft.currentAnime = action.currentAnime
       })
 
     case 'SET_COLLECTIONS':
@@ -41,6 +36,11 @@ export const reducer = (state: TState, action: TAction): TState => {
     case 'SET_REMOVED_COLLECTION':
       return produce(state, (draft) => {
         draft.removedCollection = action.removedCollection
+      })
+
+    case 'SET_SKIP':
+      return produce(state, (draft) => {
+        draft.skip = action.skip
       })
 
     case 'SET_IS_UNIQUE':

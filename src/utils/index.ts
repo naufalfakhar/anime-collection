@@ -9,14 +9,35 @@ export const postCollection = (collection: object) => {
   localStorage.setItem('collection', JSON.stringify(collection))
 }
 
+export const addToSelectedCollection = (
+  selectedCollectionName: string[],
+  animesObject: IAnime[]
+) => {
+  const currentCollectionList = getLocalStorage('collection')
+  if (currentCollectionList) {
+    const result = currentCollectionList.map((item: ICollection) => {
+      if (selectedCollectionName.includes(item.name)) {
+        item.animes = item.animes.concat(animesObject)
+        const unique = item.animes.filter(
+          (item, index, self) =>
+            index === self.findIndex((t) => t.id === item.id)
+        )
+        item.animes = unique
+      }
+      return item
+    })
+    postCollection(result)
+  }
+}
+
 export const postToSelectedCollection = (
   prevSelectedCollection: string[],
   selectedCollection: string[],
   removedCollection: string[],
   animeObject: IAnime
 ) => {
-  const currentCollection = getLocalStorage('collection')
-  if (currentCollection) {
+  const currentCollectionList = getLocalStorage('collection')
+  if (currentCollectionList) {
     const newCollection = selectedCollection
       .filter((item) => !prevSelectedCollection.includes(item))
       .concat(
@@ -29,17 +50,15 @@ export const postToSelectedCollection = (
       .filter((item) => !prevSelectedCollection.includes(item))
       .filter((item) => !removedCollection.includes(item))
 
-    const result = currentCollection.map((item: ICollection) => {
+    const result = currentCollectionList.map((item: ICollection) => {
       if (prevSelectedCollection.length > 0) {
         if (filteredCollection.includes(item.name)) {
           item.animes.push(animeObject)
-          console.log('new collection added')
         }
         if (removedCollection.includes(item.name)) {
           item.animes = item.animes.filter(
             (anime) => anime.id !== animeObject.id
           )
-          console.log('collection removed')
         }
       }
       if (prevSelectedCollection.length === 0) {
@@ -48,18 +67,16 @@ export const postToSelectedCollection = (
           console.log('new collection added 2')
         }
       }
-
       return item
     })
-    // localStorage.setItem('collection', JSON.stringify(result))
     postCollection(result)
   }
 }
 
 export const removeCollection = (removedCollection: string) => {
-  const currentCollection = getLocalStorage('collection')
-  if (currentCollection) {
-    const result = currentCollection.filter(
+  const currentCollectionList = getLocalStorage('collection')
+  if (currentCollectionList) {
+    const result = currentCollectionList.filter(
       (item: ICollection) => item.name !== removedCollection
     )
     postCollection(result)
@@ -67,15 +84,14 @@ export const removeCollection = (removedCollection: string) => {
 }
 
 export const updateCollection = (updatedCollection: ICollection) => {
-  const currentCollection = getLocalStorage('collection')
-  if (currentCollection) {
-    const result = currentCollection.map((item: ICollection) => {
+  const currentCollectionList = getLocalStorage('collection')
+  if (currentCollectionList) {
+    const result = currentCollectionList.map((item: ICollection) => {
       if (item.name === updatedCollection.name) {
         item.animes = updatedCollection.animes
       }
       return item
     })
-    console.log(result)
     postCollection(result)
   }
 }

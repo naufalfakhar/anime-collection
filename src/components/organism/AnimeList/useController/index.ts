@@ -1,46 +1,31 @@
 import * as React from 'react'
 import { useAnimeListCtx } from '@/context/AnimeListCtx'
 import { useGetAnimeList } from '@/GraphQL/getAnimeList'
-import { useGetAnime } from '@/GraphQL/getAnime'
 
 export const useController = () => {
   const {
-    state: { pageInfo, media, skipModal },
-    setPagination,
-    setMedia,
-    setMediaModal,
+    state: { pageInfo, animeList, selectedAnime, selectedAnimeName },
+    setPageInfo,
+    setAnimeList,
     setShowModalBulkAdd,
     setSkipModal,
   } = useAnimeListCtx()
 
   const { loading, data, refetch } = useGetAnimeList()
-  const {
-    loading: loadingModal,
-    data: dataModal,
-    refetch: refetchModal,
-  } = useGetAnime()
 
   React.useEffect(() => {
     refetch()
     if (data) {
-      setPagination({
+      setPageInfo({
         ...pageInfo,
         total: data.Page.pageInfo.total,
         lastPage: data.Page.pageInfo.lastPage,
         hasNextPage: data.Page.pageInfo.hasNextPage,
       })
-      setMedia(data.Page.media)
+      setAnimeList(data.Page.media)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageInfo.currentPage, data])
-
-  React.useEffect(() => {
-    refetchModal()
-    if (dataModal) {
-      setMediaModal(dataModal.Page.media)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [skipModal])
 
   const handleOpenModalBulkAdd = () => {
     setSkipModal(false)
@@ -48,9 +33,10 @@ export const useController = () => {
   }
 
   return {
-    media,
+    selectedAnime,
+    selectedAnimeName,
+    animeList,
     loading,
-    loadingModal,
     handleOpenModalBulkAdd,
   }
 }

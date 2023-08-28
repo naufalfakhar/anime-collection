@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonClose,
+  ModalContent,
   ModalHeader,
   ModalLayout,
 } from '@/components/styles'
@@ -8,9 +9,8 @@ import ContentModalAddCollection from './content'
 import { useController } from './useController'
 import { X } from 'lucide-react'
 
-export default function ModalAddCollection() {
-  const { isOpen, handleAddToCollection, handleOpenModalNewCollection } =
-    useController()
+export default function ModalCreateCollection() {
+  const { isOpen, handleClose, handleCreate } = useController()
 
   if (!isOpen) return null
 
@@ -18,13 +18,17 @@ export default function ModalAddCollection() {
     <ModalLayout>
       <div>
         <ModalHeader>
-          <p>Add Anime to...</p>
-          <ButtonClose onClick={handleAddToCollection}>
+          <p>Create new collection</p>
+          <ButtonClose onClick={handleClose}>
             <X />
           </ButtonClose>
         </ModalHeader>
-        <ContentModalAddCollection />
-        <Button onClick={handleOpenModalNewCollection}>new collection</Button>
+
+        <ModalContent>
+          <ContentModalAddCollection />
+        </ModalContent>
+
+        <Button onClick={handleCreate}>create</Button>
       </div>
     </ModalLayout>
   )

@@ -1,15 +1,18 @@
 import {
   Button,
   ButtonClose,
+  ModalContent,
   ModalHeader,
   ModalLayout,
 } from '@/components/styles'
 import ContentModalAddCollection from './content'
 import { useController } from './useController'
 import { X } from 'lucide-react'
+import Pagination from './Pagination'
 
 export default function ModalBulkAdd() {
-  const { isOpen, handleClose, handleCreate } = useController()
+  const { isOpen, handleClose, handleOpenModalAddToCollection } =
+    useController()
 
   if (!isOpen) return null
 
@@ -23,9 +26,14 @@ export default function ModalBulkAdd() {
           </ButtonClose>
         </ModalHeader>
 
-        <ContentModalAddCollection />
+        <ModalContent>
+          <ContentModalAddCollection />
+          <Pagination />
+        </ModalContent>
 
-        <Button onClick={handleCreate}>create collection</Button>
+        <Button onClick={handleOpenModalAddToCollection}>
+          add to collection...
+        </Button>
       </div>
     </ModalLayout>
   )

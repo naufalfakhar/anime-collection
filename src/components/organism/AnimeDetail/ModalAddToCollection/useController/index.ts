@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { useAnimeDetailCtx } from '@/context/AnimeDetailCtx'
 import { getLocalStorage, postToSelectedCollection } from '@/utils'
+import { IAnime, ICollection } from '@/types'
 
 export const useController = () => {
   const {
     state: {
-      Media,
+      currentAnime,
       showModalAddCollection: isOpen,
       prevSelectedCollection,
       selectedCollection,
@@ -60,26 +61,35 @@ export const useController = () => {
         prevSelectedCollection,
         selectedCollection,
         removedCollection,
-        Media
+        currentAnime
       )
       setCollectionsUpdated(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collectionsUpdated])
 
+  React.useEffect(() => {
+    if (currentCollectionList === null) return
+    setPrevSelectedCollection(
+      currentCollectionList
+        .filter((collections: ICollection) => {
+          return collections.animes.some(
+            (anime: IAnime) => anime.id === currentAnime.id
+          )
+        })
+        .map((collection: ICollection) => collection.name)
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleOpenModalNewCollection = () => {
     setShowModalAddCollection(false)
     setShowModalNewCollection(true)
   }
   return {
-    selectedCollection,
-    Media,
-    currentCollectionList,
-    prevSelectedCollection,
-    removedCollection,
     isOpen,
-    setPrevSelectedCollection,
-    setSelectedCollection,
+    currentCollectionList,
+    currentAnime,
     handleClose,
     handleCheckCollection,
     handleAddToCollection,

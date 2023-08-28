@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useController } from './useController'
 import {
-  CollectionButton,
   CollectionButtonGroup,
   CollectionListBanner,
-  CollectionGroup,
   ContentCollectionGroup,
+  Button,
+  CollectionListGroup,
 } from '@/components/styles'
 import { IAnime, ICollection } from '@/types'
 import { Edit2, Trash2 } from 'lucide-react'
@@ -31,7 +31,7 @@ export default function CollectionList() {
   return (
     <ContentCollectionGroup>
       {currentCollectionList.map((collections: ICollection, i: number) => (
-        <CollectionGroup key={i}>
+        <CollectionListGroup key={i}>
           <Link to={`/collection/${collections.name}`}>
             <CollectionListBanner
               src={
@@ -47,20 +47,22 @@ export default function CollectionList() {
             </div>
           </Link>
           <CollectionButtonGroup>
-            <CollectionButton
-              cc='#f5f5f7'
-              cbc='#dc2626'
+            <Button
+              custom-color='#f5f5f7'
+              custom-background-color='#dc2626'
               onClick={() => handleOpenModalRemoveCollection(collections.name)}
             >
               <Trash2 />
-            </CollectionButton>
-            <CollectionButton
+            </Button>
+            <Button
               onClick={() => handleOpenModalEditCollection(collections.name)}
+              custom-color='#f5f5f7'
+              custom-background-color='#3b82f6'
             >
               <Edit2 />
-            </CollectionButton>
+            </Button>
           </CollectionButtonGroup>
-        </CollectionGroup>
+        </CollectionListGroup>
       ))}
     </ContentCollectionGroup>
   )
